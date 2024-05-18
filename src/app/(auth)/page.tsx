@@ -15,6 +15,7 @@ export default function Home() {
    : isOnboarded ? (
     <main>
       youre on the home page
+      <Profile />
     </main>
   ) : <Onboarding/> 
 }
