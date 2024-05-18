@@ -123,7 +123,7 @@ export default function Onboarding() {
     <main> 
         youre on the onboarding page
         <br />
-        You should have a request to sub
+        permission: <button onClick={subscribeDevice}>subscribe!</button>
         <br/>
         {/* phone number, username, foods[], dietaries[], allergies */}
         phone number: <input type="text" value={form?.phoneNumber} onChange={e=>handleInput('phoneNumber', e.target.value)} />
