@@ -10,7 +10,9 @@ export default function Home() {
   const router = useRouter();
   const { isOnboarded, user } = useAuth();
 
-  return isOnboarded ? (
+  return !user ?
+    <Profile />
+   : isOnboarded ? (
     <main>
       youre on the home page
     </main>
