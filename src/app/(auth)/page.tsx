@@ -1,9 +1,19 @@
+"use client"
+
+import Onboarding from "@/components/Onboard/Onboard";
 import Profile from "@/components/Profile";
+import { useAuth } from "@/utility/Auth";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 export default function Home() {
-  return (
+  const router = useRouter();
+  const { isOnboarded, user } = useAuth();
+
+  return isOnboarded ? (
     <main>
-        <Profile />
+      youre on the home page
     </main>
-  );
+  ) : <Onboarding/> 
 }
+

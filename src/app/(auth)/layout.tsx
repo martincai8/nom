@@ -1,5 +1,7 @@
 "use client";
 
+import { useAuth } from "@/utility/Auth";
+import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
 export default function AppLayout({
@@ -7,7 +9,6 @@ export default function AppLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-
   useEffect(() => {
     navigator.serviceWorker
       .register("/sw.js")

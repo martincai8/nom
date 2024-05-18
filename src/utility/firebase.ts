@@ -6,7 +6,7 @@ import {
     signInWithPopup,
     onAuthStateChanged,
 } from "firebase/auth";
-import { getFirestore } from "firebase/firestore"; 
+import { collection, doc, getDoc, getFirestore, setDoc } from "firebase/firestore"; 
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -45,4 +45,39 @@ export async function signOut() {
     } catch (error) {
         console.error("Error signing out with Google", error);
     }
+}
+
+// Database helpers
+
+const userRef = collection(db, "users");
+
+interface User {
+    subscription: string;
+    isOnboarded: boolean;
+}
+
+export async function updateSubData(uid: string, data: any) {
+    await setDoc(doc(db, "users", uid), {
+        subscription: JSON.stringify(data)
+    }, { merge: true });
+}
+
+export async function getUserOnboarded(uid: string) {
+    const docRef = doc(db, "users", uid);
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+        if (docSnap.data().isOnboarded) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+export async function handleOnboardSubmit(uid: string, data: any) {
+    await setDoc(doc(db, "users", uid), {
+        ...data,
+        isOnboarded: true
+    }, { merge: true });
 }
