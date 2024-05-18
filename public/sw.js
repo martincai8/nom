@@ -6,9 +6,9 @@ self.addEventListener("install", function (event) {
 self.addEventListener('push', function(event) {
 	console.log('Push received');
     
-	let title = 'Hello';
+	let title = 'Notif';
 	const options = {
-		body: 'Thanks for sending this push msg.',
+		body: 'Notif body.',
 		icon: './images/logo-192x192.png',
 		badge: './images/badge-72x72.png',
 		data: {
@@ -18,8 +18,15 @@ self.addEventListener('push', function(event) {
 
 	if (event.data) {
 		const dataText = event.data.text();
-		title = 'payload received';
-		options.body = `data: '${dataText}'`;
+
+        switch (event.data.type) {
+            case 'booked':
+                title = "Reservation made!"
+                options.body = "Reservations have been made for 3 at xyz"
+            default:
+                title = "Get ready to eat!"
+                options.body = "Vote on today's top 3 restaurants"
+        }
 	}
 
 	event.waitUntil(
