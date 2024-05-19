@@ -52,7 +52,7 @@ export default function GroupsPage() {
                 <div>
                     
                     {groups?.map((g, index) => (
-                        <div style={{display:"flex", height:"100%"}}> 
+                        <div key={g} style={{display:"flex", height:"100%"}}> 
                             <b style={{alignSelf:"center", marginRight:"10px"}}>
                                 {index + 1}
                             </b>
