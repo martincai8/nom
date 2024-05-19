@@ -196,10 +196,10 @@ async function book(by: string, restaurantName: string, time: string, reso: numb
 						'Content-Type': 'application/json',
 						Authorization: 'Bearer YOUR_API_KEY',
 					},
-					body: JSON.stringify({
+					body: {
 						visitId: visitId,
 						statusCode: 2,
-					}),
+					},
 					input_schema: {
 						example: {
 							speech: `Thank you! Hope you win the hackathon!`,
