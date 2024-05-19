@@ -207,7 +207,7 @@ export default function Onboarding() {
     2: '73',
     3: '73',
     4: '50',
-    5: '45',
+    5: '55',
   }
 
   function handleListToggle(name: string, cb: (arg0: any) =>void, listType: 'food' | 'diet' | 'allergies') {

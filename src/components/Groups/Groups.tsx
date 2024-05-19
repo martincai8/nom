@@ -100,7 +100,7 @@ export default function Groups({ onFinish }: { onFinish: () => void }) {
 		1: '70',
 		2: '70',
 		3: '70',
-		4: '55',
+		4: '60',
 	};
 
 	const Nommers = [
