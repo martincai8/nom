@@ -57,7 +57,7 @@ export default function GroupsPage() {
                                 {index + 1}
                             </b>
                             
-                            <div className={styles.groupPanel} key={g}>
+                            <div className={styles.groupPanel} key={g.key}>
                                 <div style={{display:"flex"}}>
                                     <ProfileNoms />
                                     <p style={{alignSelf:"Center", marginLeft:"10px"}}>{g.name}</p>
