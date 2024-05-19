@@ -145,7 +145,10 @@ export default function Onboarding() {
 
   // triggered on every step
   async function onSave() {
+    console.log(user.email);
     await handleSaveUser(user.uid as string, {
+        _id: user.uid,
+        email: user.email,
         username: form.username,
         favourites: favFoods,
         dietary: dietPrefs,
@@ -155,6 +158,8 @@ export default function Onboarding() {
 
   async function onSubmit() {
     await handleOnboardSubmit(user.uid as string, {
+        _id: user.uid,
+        email: user.email,
         username: form.username, // TODO: resolve tech debt (using object for 1 field)
         favourites: favFoods,
         dietary: dietPrefs,
