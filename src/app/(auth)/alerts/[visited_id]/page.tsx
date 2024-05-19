@@ -151,7 +151,7 @@ export default function MealPage() {
     }
 
     async function onVote(vote: boolean) {
-        await voteChoice(user.uid as string, params.visited_id as string, step - 1, vote, user.displayName as string);
+        await voteChoice(user?.uid as string, params?.visited_id as string, step - 1, vote, user?.displayName as string);
         goNext();
     }
 

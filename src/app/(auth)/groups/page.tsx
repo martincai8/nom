@@ -53,7 +53,7 @@ export default function GroupsPage() {
                 </div>
             ) : (
                 <p className={styles.subText}>
-                    It’s looking a little lonely here. <br />Try making a new group!
+                    It{`'`}s looking a little lonely here. <br />Try making a new group!
                 </p>
             )}
             <div className={styles.nommerGroup}>

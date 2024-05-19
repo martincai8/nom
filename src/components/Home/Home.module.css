@@ -65,7 +65,7 @@
     display: flex;
     max-width: 100vw;
     overflow: auto;
-    padding-bottom: 0.5rem;
+    padding: 0.5rem 1rem;
     scroll-snap-type: x mandatory;
     gap: 1rem;
 }

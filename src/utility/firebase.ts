@@ -173,7 +173,7 @@ async function book(by: string, restaurantName: string, time: string, reso: numb
                 restaurantName,
                 amountOfSeatsToReserve: reso
             },
-            voice: "e1289219-0ea2-4f22-a994-c542c2a48a0f", // "Alexa"
+            voice: "2c01ebe7-45d4-4b58-9686-617fa283dd8e", // "Derek"
             from: "+12363269079",
             tools: [
                 {
