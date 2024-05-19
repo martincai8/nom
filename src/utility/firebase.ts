@@ -165,7 +165,7 @@ async function book(by: string, restaurantName: string, time: string, reso: numb
         },
         body: JSON.stringify({
             phone_number: `+17782453794`,
-            task: `You are ${by}, you want to book a reservation at ${restaurantName} restaurant for ${time} time today for ${reso} people. Keep the call short.`,
+            task: `You are ${by}, you want to book a reservation at ${restaurantName} for 1 PM today for ${reso} people. Keep the call short.`,
             wait_for_greeting: true,
             interruption_threshold: 90,
             model: 'enhanced',
@@ -186,7 +186,7 @@ async function book(by: string, restaurantName: string, time: string, reso: numb
                         "Authorization": "Bearer YOUR_API_KEY"
                     },
                     "body": {
-                        "visitId": "{{visitId}}",
+                        "visitId": visitId,
                         "statusCode": 2
                     },
                     "input_schema": {
