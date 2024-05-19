@@ -1,6 +1,4 @@
-import { Settings, Profile } from '@/components/Profile/Profile';
 import styles from './page.module.css'
-import MiniYommer from "@/drawings/MiniYommer";
 import JumpingGommer from '@/drawings/JumpingGommer';
 import Button from '@/components/Button/Button';
 

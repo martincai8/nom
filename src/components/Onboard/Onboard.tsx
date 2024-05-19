@@ -197,10 +197,10 @@ export default function Onboarding() {
   }
 
   const stepToHeight: any = {
-    0: '45',
-    1: '85',
-    2: '85',
-    3: '85',
+    0: '50',
+    1: '73',
+    2: '73',
+    3: '73',
     4: '50',
     5: '45',
   }
@@ -246,14 +246,14 @@ export default function Onboarding() {
                         <div className={styles.nommer}>
                             <Nommer />
                         </div>
-                        <h2>Choose your username</h2>
+                        <div className={styles.label}>Choose your username</div>
                         <div>
                             <TextField placeholder={"Your username"} value={form?.username} onChange={handleUsername} />
                         </div>
                     </div>
                 </div>
                 <div className={`${styles.stepInner} ${styles.step2}`}>
-                    <h2>What are your favourite foods?</h2>
+                    <div className={styles.label}>What are your favourite foods?</div>
                     <p>
                         Select at least one item
                     </p>
@@ -267,7 +267,7 @@ export default function Onboarding() {
                     </div>
                 </div>
                 <div className={styles.stepInner}>
-                    <h2>Dietary preferences</h2>
+                    <div className={styles.label}>Dietary preferences</div>
                     <p>
                         nom will offer restaurants that have options aligning with your diet
                     </p>
@@ -295,7 +295,7 @@ export default function Onboarding() {
                         <p>
                             Almost done!
                         </p>
-                        <h2>Do you have any allergies?</h2>
+                        <div className={styles.label}>Do you have any allergies?</div>
                         <h4>
                             Enter your food allergies
                         </h4>
@@ -319,7 +319,7 @@ export default function Onboarding() {
                         <p>
                             Almost done!
                         </p>
-                        <h2>Turn on push notifications</h2>
+                        <div className={styles.label}>Turn on push notifications</div>
                         <p>
                             We{`'`}ll notify you when it{`'`}s time to vote for restaurants.
                         </p>
@@ -337,7 +337,7 @@ export default function Onboarding() {
         </div>
 
         <div className={styles.control}>
-            <Button onClick={goNext} disabled={(step == 1 && form?.username == "")}>
+            <Button onClick={goNext} disabled={(step == 0 && form?.username == "")}>
                 {step == (totalSteps - 1) ? 'Create your first group' : step == 4 ? 'Allow Notifications' : 'Next'}
             </Button>
             {(step == (totalSteps - 1) || step == 4) && (

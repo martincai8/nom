@@ -4,8 +4,10 @@
   flex-direction: column;
 }
 
-.wrapper h2 {
+.label {
   font-family: "Space Grotesk", monospace;
+  font-weight: 600;
+  font-size: 1.5rem;
 }
 
 .top {
@@ -79,7 +81,7 @@
 
   display: flex;
   flex-wrap: wrap;
-  max-height: 70vh;
+  max-height: 56vh;
   overflow: auto;
   justify-content: center;
   gap: 1rem;
@@ -116,6 +118,8 @@
   display: flex;
   flex-direction: column;
   padding-top: 2rem;
+  max-height: 56vh;
+  overflow: auto;
 }
 .dietary {
   border-style: none none solid none;
@@ -196,4 +200,20 @@
   border-width: 2px;
   color: var(--color-primary);
   padding: 0.3rem 0.5rem;
+}
+
+
+/* smaller than a pro max */
+@media only screen and (max-width: 420px) {
+  .food {
+    width: 140px;
+    width: 140px;
+  }
+  .foodE {
+    font-size: 5.0rem;
+  }
+
+  .foodsGrid {
+    max-height: 53vh;
+  }
 }
