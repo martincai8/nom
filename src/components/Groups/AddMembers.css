@@ -52,6 +52,7 @@ input {
 .primary-button {
     font-family: 'Space Grotesk', sans-serif;
     border-radius: 5px;
+    font-size: 20px; 
     background-color: #F23F3A;
     color: white;
     display: inline-flex;
