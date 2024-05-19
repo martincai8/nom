@@ -217,13 +217,13 @@ export default function Groups({ onFinish }: { onFinish: () => void }) {
 							onLoad={() => console.log('Maps API has loaded.')}
 						>
 							<div className={`${styles.mapContainer}`}>
-								<Map defaultCenter={markerLocation} defaultZoom={13} gestureHandling={'greedy'} disableDefaultUI />
+								<Map defaultCenter={markerLocation} center={markerLocation} defaultZoom={13} gestureHandling={'greedy'} disableDefaultUI />
 								<Marker position={markerLocation} />
 							</div>
 						</APIProvider>
 
 						<p className={`${styles.mapText}`}>Pinch and drag to adjust the location and radius</p>
-						
+
 						<div className={`${styles.capsuleWrapper}`}>
 							<Walking />
 							<p className={`${styles.distanceText}`}>{walkingDistance}m</p>
