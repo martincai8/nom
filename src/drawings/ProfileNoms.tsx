@@ -1,4 +1,4 @@
-const ProfileNom = () => (
+const ProfileNoms = () => (
 
 <svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
 <mask id="mask0_171_784" style={{ maskType: "alpha" }} maskUnits="userSpaceOnUse" x="0" y="0" width="50" height="50">
@@ -28,7 +28,6 @@ const ProfileNom = () => (
 <path d="M45.6593 39.7979C47.0763 42.305 49.6162 48.4639 48.4389 53.0422" stroke="black" stroke-width="0.654041" stroke-linecap="round"/>
 </g>
 </svg>
-
 )
 
-export default ProfileNom;
+export default ProfileNoms;

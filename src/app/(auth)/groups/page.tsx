@@ -8,7 +8,7 @@ import Button from '@/components/Button/Button';
 import { useAuth } from '@/utility/Auth';
 import { getAllGroups } from '@/utility/firebase';
 import NommerGroup from '@/drawings/NommerGroup';
-import ProfileNom from '@/drawings/profileNom';
+import ProfileNoms from '@/drawings/ProfileNoms';
 
 export default function GroupsPage() {
 
@@ -59,7 +59,7 @@ export default function GroupsPage() {
                             
                             <div className={styles.groupPanel} key={g}>
                                 <div style={{display:"flex"}}>
-                                    <ProfileNom />
+                                    <ProfileNoms />
                                     <p style={{alignSelf:"Center", marginLeft:"10px"}}>{g.name}</p>
                                 </div>
                             </div>
