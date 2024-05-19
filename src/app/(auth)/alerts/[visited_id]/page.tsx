@@ -150,12 +150,12 @@ export default function MealPage() {
         )
     }
 
-    const countdownUntil = (new Date().getTime() + 200000);
-
     async function onVote(vote: boolean) {
         await voteChoice(user.uid as string, params.visited_id as string, step - 1, vote, user.displayName as string);
         goNext();
     }
+
+    const countdownUntil = data && `${(new Date(data.voteBy).toString()).substring(16,24)} Today`;
 
     return (
         <div className={styles.wrapper}>

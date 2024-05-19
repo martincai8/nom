@@ -123,6 +123,16 @@ export async function getGroup(id: string) {
     return false;
 }
 
+export async function getAllVisits() {
+    const q = query(collection(db, "visits"));
+    const querySnapshot = await getDocs(q);
+    const docs: any = [];
+    querySnapshot.forEach((doc) => {
+        docs.push({...doc.data(),_id:doc.id});
+    });
+    return docs;
+}
+
 
 export async function getVisit(id: string) {
     const docRef = doc(db, "visits", id);
@@ -215,7 +225,7 @@ export async function voteChoice(uid: string, visitId: string, option: 0 | 1 | 2
     // the new option that visit will be updated with
     const newOptions = visit?.options;
     if (vote) {
-        newOptions[option].voteCout += 1;
+        newOptions[option].voteCount += 1;
     }
     
     // the new users array that visit will be updated with

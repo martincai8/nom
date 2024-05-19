@@ -43,16 +43,19 @@ export default function GroupsPage() {
                     Create group
                 </Button>
             </div>
-            <p className={styles.subText}>
-                It’s looking a little lonely here. <br />Try making a new group!
-            </p>
-            <div>
-                {groups?.map((g, index) => (
-                    <div key={g}>
-                       {index + 1}: {JSON.stringify(g)}
-                    </div>
-                ))}
-            </div>
+            {groups && groups?.length > 0 ? (
+                <div>
+                    {groups?.map((g, index) => (
+                        <div key={g}>
+                        {index + 1}: {g.name}
+                        </div>
+                    ))}
+                </div>
+            ) : (
+                <p className={styles.subText}>
+                    It’s looking a little lonely here. <br />Try making a new group!
+                </p>
+            )}
             <div className={styles.nommerGroup}>
                 <NommerGroup />
             </div>

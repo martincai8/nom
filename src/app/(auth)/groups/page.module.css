@@ -1,13 +1,12 @@
 
 .wrapper {
-    padding: 4rem 1.5rem 6.5rem 1.5rem;
+    padding:25vh 1.5rem 6.5rem 1.5rem;
     overflow: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
     overflow: hidden;
     height: 100vh;
-    justify-content: center;
 }
 
 .wrapper h1 {
