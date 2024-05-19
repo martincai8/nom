@@ -104,7 +104,7 @@ export default function Groups({ onFinish }: { onFinish: () => void }) {
 		0: '55',
 		1: '70',
 		2: '70',
-		3: '70',
+		3: '55',
 		4: '60',
 	};
 
@@ -226,11 +226,12 @@ export default function Groups({ onFinish }: { onFinish: () => void }) {
 							</div>
 						</APIProvider>
 
-						<p className={`${styles.mapText}`}>Pinch and drag to adjust the location and radius</p>
-
-						<div className={`${styles.capsuleWrapper}`}>
-							<Walking />
-							<p className={`${styles.distanceText}`}>{walkingDistance}m</p>
+						<div style={{display:"flex", justifyContent:"space-between"}}>
+							<p className={`${styles.mapText}`}>Enter travel radius</p>
+							<div className={`${styles.capsuleWrapper}`}>
+								<Walking />
+								<p className={`${styles.distanceText}`}>{walkingDistance}m</p>
+							</div>
 						</div>
 					</div>
 
@@ -269,7 +270,7 @@ export default function Groups({ onFinish }: { onFinish: () => void }) {
 							<div style={{display:"flex", justifyContent:"center"}}>
 								<h1 className={styles.label} style={{textAlign:"center"}}>{groupName}</h1>
 							</div>
-							<p style={{textAlign:"center"}}>Created!</p>
+							<p style={{textAlign:"center"}}>Group created!</p>
 						</div>
 					</div>
 				</div>
