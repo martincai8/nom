@@ -23,7 +23,10 @@ const keyToLabelMap: any = {
 
 export function Settings() {
 
+    const { logOut } = useAuth();
+
     return (
+        <>
         <div className={styles.card}>
             <h2>Food Preferences & Restrictions</h2>
             <div className={styles.settings}>
@@ -35,12 +38,21 @@ export function Settings() {
                 ))}
             </div>
         </div>
+        <div className={styles.info} style={{padding: '1rem 1rem'}}>
+            <div className={styles.infoLabel}>
+                Account
+            </div>
+            <div className={styles.infoValue} onClick={()=>logOut()}>
+                Sign out
+            </div>
+        </div>
+        </>
     )
 }
 
 export function Profile() {
 
-    const { user } = useAuth();
+    const { user, logOut } = useAuth();
 
     return (
         <div className={styles.card}>
