@@ -20,11 +20,15 @@ import ShortNerdyBommer from '@/drawings/ShortNerdyBommer';
 import ShortPommer from '@/drawings/ShortPommer';
 import CuriousYommer from '@/drawings/CuriousYommer';
 import NerdyGommer from '@/drawings/NerdyGommer';
+import { useAuth } from '@/utility/Auth';
 
 export default function Groups({ onFinish }: { onFinish: () => void }) {
+
+	const { user } = useAuth();
+
 	const totalSteps = 5;
 	const [step, setStep] = useState<number>(0);
-	const [members, setMembers] = useState<any[]>([{ key: 123, email: 'joanne.jiwoo@gmail.com', role: 'Admin' }]);
+	const [members, setMembers] = useState<any[]>([{ key: 123, email: user?.email, role: 'Admin' }]);
 	const [memberName, setMemberName] = useState<string>('');
 	const [groupName, setGroupName] = useState('nwPlus n friends');
 	const [address, setAddress] = useState('');
