@@ -4,6 +4,10 @@
   flex-direction: column;
 }
 
+.wrapper p {
+  text-align: left;
+}
+
 .label {
   font-family: "Space Grotesk", monospace;
   font-weight: 600;

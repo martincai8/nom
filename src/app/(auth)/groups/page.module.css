@@ -2,9 +2,34 @@
 .wrapper {
     padding: 4rem 1.5rem 6.5rem 1.5rem;
     overflow: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+    height: 100vh;
+    justify-content: center;
 }
 
 .wrapper h1 {
     margin: 0;
     font-family: "Space Grotesk", sans-serif;
 }
+
+.horWrapper {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+    position: absolute;
+    top: 4rem;
+}
+
+.subText {
+    color: #55525B;
+    text-align: center;
+}
+
+.nommerGroup {
+    position: absolute;
+    bottom: 12rem;
+}
+
