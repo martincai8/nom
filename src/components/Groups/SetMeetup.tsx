@@ -8,15 +8,15 @@ import Walking from '@/drawings/Walking';
 export default function SetMeetup() {
     const [isNextDisabled, setIsNextDisabled] = useState(false);
     const [walkingDistance, setWalkingDistance] = useState(100);
+    const [address, setAddress] = useState(''); 
     const [markerLocation, setMarkerLocation] = useState({
         lat: 49.2791,
         lng: -122.9202,
       });
 
-    const handleAddressChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const address = event.target.value;
+    const handleAddressChange = () => {
         // get lat lng and update markerLocation
-
+        
     };
 
     return (
@@ -25,7 +25,11 @@ export default function SetMeetup() {
             <p>We’ll suggest restaurants that are in your group’s area</p>
 
             <h2>Enter Address</h2>
-            <input type="text" placeholder="ex. your office area" onChange={handleAddressChange}/>
+            <div className='hor-wrapper'>
+                <input type="text" placeholder="ex. your office area" onChange={(e) => {setAddress(e.target.value)}}/>
+                <button className='primary-button' onChange={handleAddressChange}>Enter</button>
+            </div>
+            
 
             <APIProvider apiKey={process.env.GOOGLE_PLACES_API_KEY ?? ''} onLoad={() => console.log('Maps API has loaded.')}>
                 <div className='map-container'>
