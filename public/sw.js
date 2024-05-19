@@ -18,6 +18,7 @@ self.addEventListener('push', function(event) {
 
 	if (event.data) {
 		const dataText = event.data.text();
+		const data = JSON.parse(dataText);
 
         switch (event.data.type) {
             case 'booked':
@@ -26,6 +27,7 @@ self.addEventListener('push', function(event) {
             default:
                 title = "Get ready to eat!"
                 options.body = "Vote on today's top 3 restaurants"
+				options.data.url = `https://nom-nu.vercel.app/alerts/${data?.visitId}`
         }
 	}
 

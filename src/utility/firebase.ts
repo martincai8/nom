@@ -7,6 +7,7 @@ import {
     onAuthStateChanged,
 } from "firebase/auth";
 import { addDoc, collection, doc, getDoc, getDocs, getFirestore, query, setDoc, where } from "firebase/firestore"; 
+import { API_URL } from "./config";
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -122,13 +123,123 @@ export async function getGroup(id: string) {
     return false;
 }
 
+
+export async function getVisit(id: string) {
+    const docRef = doc(db, "visits", id);
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+        return docSnap.data();
+    }
+}
+
+
+async function book(by: string, restaurantName: string, time: string, reso: number, visitId:string) {
+    const options = {
+        method: 'POST',
+        headers: {
+            authorization: 'sk-hilyr75eqfk8r7to4xlamtcde8g6x626jqkr1wx5yfsep0p4arhl9abcs8ygtsb969',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            phone_number: `+17782453794`,
+            task: `You are ${by}, you want to book a reservation at ${restaurantName} restaurant for ${time} time today for ${reso} people. You should say thank you and hang up if they don't take reservations or the time + 15 minutes is not available.`,
+            wait_for_greeting: true,
+            interruption_threshold: 90,
+            model: 'enhanced',
+            request_data: {
+                restaurantName,
+                amountOfSeatsToReserve: reso
+            },
+            voice: "e1289219-0ea2-4f22-a994-c542c2a48a0f", // "Alexa"
+            from: "+12363269079",
+            tools: [
+                {
+                    name: "NotifyFriends",
+                    description: "Only if a reservation is successful, notifies friends of the booking",
+                    "url": `${API_URL}/api/updatedStatusCode`,
+                    "method": "POST",
+                    "headers": {
+                        "Authorization": "Bearer YOUR_API_KEY"
+                    },
+                    "body": {
+                        "visitId": visitId,
+                        "statusCode": 2
+                    },
+                    "input_schema": {
+                        "example": {
+                            "speech": `Thank you! To confirm, the booking is for ${reso} at ${time} today? I'll let my friends know`,
+                            "time": "{{input.time}}",
+                        },
+                        "type": "object",
+                        "properties": {
+                            "speech": "string",
+                            "time": "HH:MM AM/PM",
+                        }
+                    },
+                    "response": {
+                        "succesfully_reserved_time": "$.success",
+                    }
+                }
+            ]
+        })
+      };
+
+      const response = await fetch('https://api.bland.ai/v1/calls', options)
+      const data = await response.json();
+      console.log(data);
+    }
+
 /**
  * 
  * @param uid the user casting the vote
- * @param mealId the `visit` collection item being voted to
+ * @param visitId the `visit` collection item being voted to
  * @param option the option being voted on
  * @param vote being casted
+ * @param displayName the name of the person voting
  */
-export async function vote(uid: string, mealId: string, option: 1 | 2 | 3, vote: boolean) {
+export async function voteChoice(uid: string, visitId: string, option: 0 | 1 | 2 | number, vote: boolean, displayName: string) {
+
+    const visit = await getVisit(visitId);
+
+    // check if user already voted
+    const alreadyVoted = visit?.users.includes(uid); 
+    if (alreadyVoted) return;
+
+
+    // the new option that visit will be updated with
+    const newOptions = visit?.options;
+    if (vote) {
+        newOptions[option].voteCout += 1;
+    }
     
+    // the new users array that visit will be updated with
+    const newUsers = visit?.users;
+    newUsers.push(uid);
+
+    
+    // update visits doc
+    await setDoc(doc(db, "visits", visitId), {
+        option: newOptions,
+        users: newUsers
+    }, { merge: true });
+
+    const group = await getGroup(visit?.groupId);
+    if(!group) return
+
+
+    // rank order options by voteCount
+    const restaurants = newOptions.sort((a: any, b: any) => a.voteCount > b.voteCount ? 1 : 0)
+    console.log(restaurants);
+
+
+    const restaurantChoice = restaurants[0];
+
+    if (newUsers.length == group.users.length) {
+        // user is the last voter, make call  trigger booking by top restaurant
+
+        const date = new Date(visit?.voteBy)
+        const fifteenAfter = (new Date(date.getTime() + 15*60000)).toString();
+
+        book(displayName, restaurantChoice.name, fifteenAfter.substring(0, 15), newUsers.length, visitId);
+    }
 }

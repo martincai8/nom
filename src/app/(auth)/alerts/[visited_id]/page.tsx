@@ -5,12 +5,14 @@ import styles from './page.module.css'
 import ZoomingNommers from '@/drawings/ZoomingNommers';
 import Button from '@/components/Button/Button';
 import Countdown from '@/components/Countdown/Countdown';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import RestaurantCard, { Visit } from '@/components/RestaurantCard/RestaurantCard';
 import NerdyBommer from '@/drawings/NerdyBommer';
 import HappyNommers from '@/drawings/HappyNommers';
 import DancingPommer from '@/drawings/DancingPommer';
 import Image from 'next/image';
+import { useAuth } from '@/utility/Auth';
+import { getVisit, voteChoice } from '@/utility/firebase';
 
 const BigNo = () => (<svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M7.15152 6.95157C7.62015 6.48294 8.37995 6.48294 8.84858 6.95157L15.2 13.303L21.5515 6.95157C22.0202 6.48294 22.7799 6.48294 23.2486 6.95157C23.7172 7.4202 23.7172 8.18 23.2486 8.64863L16.8971 15.0001L23.2486 21.3516C23.7172 21.8202 23.7172 22.58 23.2486 23.0486C22.7799 23.5173 22.0202 23.5173 21.5515 23.0486L15.2 16.6972L8.84858 23.0486C8.37995 23.5173 7.62015 23.5173 7.15152 23.0486C6.68289 22.58 6.68289 21.8202 7.15152 21.3516L13.503 15.0001L7.15152 8.64863C6.68289 8.18 6.68289 7.4202 7.15152 6.95157Z" fill="#F23F3A"/>
@@ -100,8 +102,21 @@ const placeholder: Visit = {
 
 export default function MealPage() {
 
+    const { user } = useAuth();
+
     const router = useRouter();
     const params = useParams();
+
+    const [data, setData] = useState<any>();
+
+    async function getVisitInfo() {
+        const visitObj = await getVisit(params.visited_id as string);
+        setData(visitObj);
+    }
+
+    useEffect(() => {
+        getVisitInfo()
+    }, [params])
 
     /**
      * 0: "Time to nom"
@@ -138,16 +153,7 @@ export default function MealPage() {
     const countdownUntil = (new Date().getTime() + 200000);
 
     async function onVote(vote: boolean) {
-        switch (step) {
-            case 1: 
-                // call firebase.tsx -> vote()
-            case 2:
-                // call firebase.tsx -> vote()
-            case 3:
-                // call firebase.tsx -> vote()
-            default:
-                console.log('wtf')
-        }
+        await voteChoice(user.uid as string, params.visited_id as string, step - 1, vote, user.displayName as string);
         goNext();
     }
 
@@ -183,7 +189,7 @@ export default function MealPage() {
                             Option {step}/3
                         </div>
                     </div>
-                    <RestaurantCard data={placeholder.options[step - 1]} />
+                    <RestaurantCard data={data.options[step - 1]} />
                     <div className={styles.tray}>
                         <div className={styles.no} onClick={()=>onVote(false)}>
                             <BigNo />
@@ -197,7 +203,7 @@ export default function MealPage() {
             {step == 4 && (
                 <>
                     {/* openVote */}
-                    {placeholder.status == 'openVote' && (
+                    {data.status == 0 && (
                         <div className={styles.fixed}>
                             <div style={{position: 'fixed', top: 0, left: 0,zIndex: -1}}><svg width="430" height="359" viewBox="0 0 430 359" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <g clip-path="url(#clip0_118_218)">
@@ -217,7 +223,7 @@ export default function MealPage() {
                         </div>
                     )}
                     {/* confirmedChoice */}
-                    {placeholder.status == 'confirmedChoice' && (
+                    {data.status == 1 && (
                         <div className={styles.fixed}>
                             <div style={{position: 'fixed', top: 0, left: 0,zIndex: -1}}>
                                 <svg width="430" height="361" viewBox="0 0 430 361" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -238,7 +244,7 @@ export default function MealPage() {
                         </div>
                     )}
                     {/* confirmedBooking */}
-                    {placeholder.status == 'confirmedBooking' && (
+                    {data.status == 3 && (
                         <div className={styles.fixed}>
                             <div className={styles.note}>
                                 <span><YellowCheck /></span>
@@ -257,20 +263,17 @@ export default function MealPage() {
                                 <h2>Booking Information</h2>
                                 <div>
                                     <div>
-                                        <Clock /> 12:30 pm
+                                        <Clock /> {data}
                                     </div>
                                     <div>
-                                        <Person /> 4
-                                    </div>
-                                    <div>
-                                        <Pencil /> Joanne Lee
+                                        <Person /> {data?.users?.length}
                                     </div>
                                 </div>
                             </div>
                         </div>
                     )}
                     {/* postMeal */}
-                    {placeholder.status == 'postMeal' && (
+                    {data.status == 3 && (
                         <div className={styles.fixed}>
                             <div style={{position: 'fixed', top: 0, left: 0,zIndex: -1}}>
                                 <svg width="430" height="435" viewBox="0 0 430 435" fill="none" xmlns="http://www.w3.org/2000/svg">
