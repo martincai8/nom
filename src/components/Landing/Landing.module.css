@@ -29,7 +29,7 @@
   color: var(--color-primary);
   line-height: 100%;
   padding-bottom: 1rem;
-  font-family: "Space Grotesk",;
+  font-family: "Space Grotesk", monospace;
 }
 
 .headers h4 {

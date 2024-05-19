@@ -1,0 +1,33 @@
+.wrapper {
+    position:relative;
+}
+
+.dropdown {
+    position: absolute;
+    background: white;
+    top: 100%;
+    width: 100%;
+    padding: 0.8rem;
+    transition: opacity 0.13s ease, transform 0.13s ease;
+
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-2.5px);
+
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+
+    box-shadow: 0 0 10px rgba(0,0,0,0.05);
+    border-radius: 10px;
+}
+
+.dropdown.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0px);
+}
+
+.item {
+    font-size: 1.1rem;
+}

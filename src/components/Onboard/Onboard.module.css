@@ -4,6 +4,10 @@
   flex-direction: column;
 }
 
+.wrapper h2 {
+  font-family: "Space Grotesk", monospace;
+}
+
 .top {
   display: flex;
   padding: 1.5rem;
@@ -28,10 +32,18 @@
   align-content: center;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.fadedAction {
+  color: rgba(0,0,0,0.4);
+  text-decoration: underline;
 }
 
 /* individual steps */
 
+/* username */
 .nommer {
   margin: 0 auto;
   padding-bottom: 3rem;
@@ -49,4 +61,139 @@
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+}
+
+/* preferences */
+
+.step2 {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.foodsGrid {
+  border: 1px solid rgba(0,0,0,0.2);
+  border-radius: 10px;
+  padding: 1.5rem 1rem;
+  margin-top: 1rem;
+
+  display: flex;
+  flex-wrap: wrap;
+  max-height: 70vh;
+  overflow: auto;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.food {
+  max-width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #F7F5F3;
+  border-radius: 10px;
+  width: 152px;
+  height: 152px;
+  border: 4px solid #F7F5F3;
+  transition: all 0.1s ease;
+}
+
+.foodE {
+  font-size: 5.3rem;
+}
+.foodT {
+  font-family: "Space Grotesk", monospace;
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.food.active {
+  border-color: var(--color-primary);
+}
+
+/* Dietary preferences */
+.dietaryList {
+  display: flex;
+  flex-direction: column;
+  padding-top: 2rem;
+}
+.dietary {
+  border-style: none none solid none;
+  border-width: 1px;
+  border-color: #EEE;
+  font-size: 1.4rem;
+  font-weight: 500;
+  padding: 0.8rem 0;
+  font-family: "Space Grotesk", monospace;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dietary:last-child {
+  border-style: none;
+}
+
+.checkMark {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 100%;
+  border: 2px solid rgba(0,0,0,0.5);
+  height: 27px;
+  width: 27px;
+  transition: all 0.13s ease;
+}
+.checkMark.active {
+  border-color: var(--color-primary);
+}
+.checkMarkInner {
+  transition: all 0.13s ease;
+  opacity: 0;
+  transform: scale(0.8);
+}
+.checkMark.active .checkMarkInner {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Allergies */
+.stepInner h4 {
+  font-family: 'Space Grotesk', monospace;
+  font-weight: 400;
+}
+
+
+/* Last step */
+.stepFinal h1 {
+  font-family: "Space Grotesk", monospace;
+  font-size: 2.4rem;
+  text-align: center;
+}
+.hl {
+  color: var(--color-primary);
+}
+
+.centre {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3rem;
+  padding-top: 3rem;
+}
+
+.selectedAllergies {
+  padding-top: 1.2rem;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.allergyItem {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--color-primary);
+  border-radius: 5px;
+  border-width: 2px;
+  color: var(--color-primary);
+  padding: 0.3rem 0.5rem;
 }
