@@ -220,9 +220,11 @@ export default function Groups({ onFinish }: { onFinish: () => void }) {
 
 							<p className={`${styles.mapText}`}>Pinch and drag to adjust the location and radius</p>
 
-							<div className={`${styles.capsuleWrapper}`}>
-								<Walking />
-								<p className={`${styles.distanceText}`}>{walkingDistance}m</p>
+							<div className={`${styles.outerCapsule}`}>
+								<div className={`${styles.capsuleWrapper}`}>
+									<Walking />
+									<p className={`${styles.distanceText}`}>{walkingDistance}m</p>
+								</div>
 							</div>
 						</div>
 					</div>
