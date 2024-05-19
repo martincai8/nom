@@ -8,6 +8,7 @@ import Button from '@/components/Button/Button';
 import { useAuth } from '@/utility/Auth';
 import { getAllGroups } from '@/utility/firebase';
 import NommerGroup from '@/drawings/NommerGroup';
+import ProfileNom from '@/drawings/profileNom';
 
 export default function GroupsPage() {
 
@@ -32,6 +33,10 @@ export default function GroupsPage() {
         getGroups();
     }, [user])
 
+    // const testGroups = [{key:123, name: "nwPlus n friends"}];
+
+
+
     return !creating ? (
         <div className={styles.wrapper}>
             {/* <MiniYommer /> */}
@@ -39,15 +44,25 @@ export default function GroupsPage() {
                 <h1>
                     Your groups
                 </h1>
-                <Button onClick={()=>setCreating(true)}>
+                <button className={styles.createButton} onClick={()=>setCreating(true)}>
                     Create group
-                </Button>
+                </button>
             </div>
             {groups && groups?.length > 0 ? (
                 <div>
+                    
                     {groups?.map((g, index) => (
-                        <div key={g}>
-                        {index + 1}: {g.name}
+                        <div style={{display:"flex", height:"100%"}}> 
+                            <b style={{alignSelf:"center", marginRight:"10px"}}>
+                                {index + 1}
+                            </b>
+                            
+                            <div className={styles.groupPanel} key={g}>
+                                <div style={{display:"flex"}}>
+                                    <ProfileNom />
+                                    <p style={{alignSelf:"Center", marginLeft:"10px"}}>{g.name}</p>
+                                </div>
+                            </div>
                         </div>
                     ))}
                 </div>
