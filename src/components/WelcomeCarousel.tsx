@@ -21,6 +21,9 @@ const WelcomeCarousel: React.FC = () => {
                     <img src="/images/secureSpot.png" alt="Secure a spot" />
                     <h1>Secure a spot</h1>
                     <p>No need to worry about booking a reservation - we do all that for you.</p>
+                    <div className='button-row'>
+                        <button>Get Started</button>
+                    </div>
                 </div>
             </Carousel>
         </div>
