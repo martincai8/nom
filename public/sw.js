@@ -23,7 +23,8 @@ self.addEventListener('push', function(event) {
         switch (event.data.type) {
             case 'booked':
                 title = "Reservation made!"
-                options.body = "Reservations have been made for 3 at xyz"
+                options.body = data?.body;
+				options.data.url = `https://nom-nu.vercel.app/alerts/${data?.visitId}`
             default:
                 title = "Get ready to eat!"
                 options.body = data?.body;
