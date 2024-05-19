@@ -176,7 +176,7 @@ async function book(by: string, restaurantName: string, time: string, reso: numb
 		},
 		body: JSON.stringify({
 			phone_number: `+17782453794`,
-			task: `You are ${by}, you want to book a reservation at ${restaurantName} for 1 PM today (may 19th) for ${reso} people. Keep the call short.`,
+			task: `You are ${by}, you want to book a reservation at ${restaurantName} for 5 PM today (may 19th) for ${reso} people. Keep the call short.`,
 			wait_for_greeting: true,
 			interruption_threshold: 90,
 			model: 'enhanced',

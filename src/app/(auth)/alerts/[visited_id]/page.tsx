@@ -13,6 +13,8 @@ import DancingPommer from '@/drawings/DancingPommer';
 import Image from 'next/image';
 import { useAuth } from '@/utility/Auth';
 import { getVisit, voteChoice } from '@/utility/firebase';
+import NerdyGommer from '@/drawings/NerdyGommer';
+import Pommer from '@/drawings/Pommer';
 
 const BigNo = () => (<svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M7.15152 6.95157C7.62015 6.48294 8.37995 6.48294 8.84858 6.95157L15.2 13.303L21.5515 6.95157C22.0202 6.48294 22.7799 6.48294 23.2486 6.95157C23.7172 7.4202 23.7172 8.18 23.2486 8.64863L16.8971 15.0001L23.2486 21.3516C23.7172 21.8202 23.7172 22.58 23.2486 23.0486C22.7799 23.5173 22.0202 23.5173 21.5515 23.0486L15.2 16.6972L8.84858 23.0486C8.37995 23.5173 7.62015 23.5173 7.15152 23.0486C6.68289 22.58 6.68289 21.8202 7.15152 21.3516L13.503 15.0001L7.15152 8.64863C6.68289 8.18 6.68289 7.4202 7.15152 6.95157Z" fill="#F23F3A"/>
@@ -127,8 +129,16 @@ export default function MealPage() {
      * 4: final screen: openVote | confirmedChoice | confirmedBooking | "Post"
      *  */
     // set initial value to 4 based on status
-    const [step, setStep] = useState<number>((data && data?.statusCode != 0) ? data?.statusCode : 0)
 
+
+    const [step, setStep] = useState<number>(0)
+
+    useEffect(()=> {
+        if (data && data?.statusCode != 0) {
+            setStep(4)   
+        }
+    }, [data])
+    
     function goNext() {
         if (step == 4) return;
         setStep(step + 1);
@@ -261,14 +271,27 @@ export default function MealPage() {
                                 </div>
                             </div>
                             <div className={styles.booking}>
-                                <h2>Booking Information</h2>
-                                <div>
-                                    <div>
-                                        <Clock /> {data}
+                                <h2 style={{fontWeight: 500}}>Booking Information</h2>
+                                <p style={{
+                                    width: '100%',
+                                    textAlign: 'left',
+                                    fontSize: '1.1rem',
+                                    paddingTop: '0.5rem'
+                                }}>
+                                    {data.bookedRestaurant.description} 
+                                </p>
+                                <div style={{display:'flex', flexDirection:'column',gap: '0.5rem',paddingTop: '1rem'}}>
+                                    <div style={{display: 'flex',alignItems: 'center',gap: '0.3rem', fontSize: '1.3rem'}}>
+                                        <Clock /> 5 PM
                                     </div>
-                                    <div>
-                                        <Person /> {data?.users?.length}
+                                    <div style={{display: 'flex',alignItems: 'center',gap: '0.3rem', fontSize: '1.3rem'}}>
+                                        <Person /> For {data?.users?.length}
                                     </div>
+                                </div>
+                                <div style={{
+                                    float: "right"
+                                }}>
+                                    <Pommer />
                                 </div>
                             </div>
                         </div>
