@@ -32,7 +32,7 @@ p {
 
 .carousel .control-dots {
     position: fixed !important;
-    bottom: 8rem !important;
+    bottom: 7rem !important;
 }
 
 .carousel .control-dots .dot {
