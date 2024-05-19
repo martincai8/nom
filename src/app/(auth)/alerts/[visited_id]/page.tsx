@@ -263,11 +263,11 @@ export default function MealPage() {
                             </div>
                             <div className={styles.info}>
                                 <div style={{display:'flex',flexDirection:'column',gap: '0.3rem'}}>
-                                    <h1>Tendon Kohaku</h1>
-                                    <span style={{opacity: 0.7}}>(604) 416 3936</span>
+                                    <h1>{data?.bookedRestaurant?.name}</h1>
+                                    <span style={{opacity: 0.7}}>{data?.bookedRestaurant?.phoneNumber}</span>
                                 </div>
                                 <div className={styles.squareImg}>
-                                    <Image layout="fill" objectFit="cover" alt="ya" src="https://cdn.activifinder.com/media/blocks/images/Steves-Pok%C3%A9-1.large.webp" />
+                                    <Image layout="fill" objectFit="cover" alt="ya" src={data?.bookedRestaurant?.images[0] || "https://cdn.activifinder.com/media/blocks/images/Steves-Pok%C3%A9-1.large.webp"} />
                                 </div>
                             </div>
                             <div className={styles.booking}>
@@ -278,7 +278,7 @@ export default function MealPage() {
                                     fontSize: '1.1rem',
                                     paddingTop: '0.5rem'
                                 }}>
-                                    {data.bookedRestaurant.description} 
+                                    {data?.bookedRestaurant?.description} 
                                 </p>
                                 <div style={{display:'flex', flexDirection:'column',gap: '0.5rem',paddingTop: '1rem'}}>
                                     <div style={{display: 'flex',alignItems: 'center',gap: '0.3rem', fontSize: '1.3rem'}}>
