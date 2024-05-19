@@ -104,7 +104,7 @@ export default function Groups({ onFinish }: { onFinish: () => void }) {
 		0: '55',
 		1: '70',
 		2: '70',
-		3: '55',
+		3: '65',
 		4: '60',
 	};
 
