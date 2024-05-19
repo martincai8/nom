@@ -186,6 +186,7 @@ async function book(by: string, restaurantName: string, time: string, reso: numb
 			},
 			voice: '2c01ebe7-45d4-4b58-9686-617fa283dd8e', // "Derek"
 			from: '+12363269079',
+            webhook: 'https://nom-server-production.up.railway.app/api/subscription/callend',
 			tools: [
 				{
 					name: 'NotifyFriends',
