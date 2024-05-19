@@ -7,7 +7,7 @@ import Groups from '@/components/Groups/Groups';
 import Button from '@/components/Button/Button';
 import { useAuth } from '@/utility/Auth';
 import { getAllGroups } from '@/utility/firebase';
-import NommerGroup from '@/drawings/nommerGroup';
+import NommerGroup from '@/drawings/NommerGroup';
 
 export default function GroupsPage() {
 
