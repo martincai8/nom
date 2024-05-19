@@ -27,7 +27,7 @@ export default function SetMeetup() {
             <h2>Enter Address</h2>
             <input type="text" placeholder="ex. your office area" onChange={handleAddressChange}/>
 
-            <APIProvider apiKey={'AIzaSyDicc-hraW0CWUW4j4eRkRCCb9ODTeonzc'} onLoad={() => console.log('Maps API has loaded.')}>
+            <APIProvider apiKey={process.env.GOOGLE_PLACES_API_KEY ?? ''} onLoad={() => console.log('Maps API has loaded.')}>
                 <div className='map-container'>
                     <Map
                         defaultCenter={markerLocation}
