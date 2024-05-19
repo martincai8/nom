@@ -10,8 +10,9 @@ import SetMeetup from "@/components/Groups/SetMeetup";
 import { useAuth } from "@/utility/Auth";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import Home from "@/components/Home/Home";
 
-export default function Home() {
+export default function App() {
   const router = useRouter();
   const { isOnboarded, user } = useAuth();
 
@@ -23,8 +24,5 @@ export default function Home() {
       : <Landing />
     : !isOnboarded ?
       <Onboarding/>  
-    : <main>
-        youre on the home page
-        <Profile />
-      </main>
+    : <Home />
 }

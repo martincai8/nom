@@ -96,3 +96,14 @@ export async function handleOnboardSubmit(uid: string, data: any) {
         isOnboarded: true
     }, { merge: true });
 }
+
+export async function getGroup(id: string) {
+    const docRef = doc(db, "groups", id);
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+        return docSnap.data();
+    }
+
+    return false;
+}
