@@ -179,14 +179,14 @@ async function book(by: string, restaurantName: string, time: string, reso: numb
                 {
                     name: "NotifyFriends",
                     description: "Only if a reservation is successful, notifies friends of the booking",
-                    "url": `${API_URL}/api/updateStatusCode`,
+                    "url": "https://nom-server-production.up.railway.app/api/updateStatusCode",
                     "method": "POST",
                     "headers": {
                         "Content-Type": 'application/json',
                         "Authorization": "Bearer YOUR_API_KEY"
                     },
                     "body": {
-                        "visitId": visitId,
+                        "visitId": "{{visitId}}",
                         "statusCode": 2
                     },
                     "input_schema": {
