@@ -126,7 +126,7 @@ export default function MealPage() {
      * 4: final screen: openVote | confirmedChoice | confirmedBooking | "Post"
      *  */
     // set initial value to 4 based on status
-    const [step, setStep] = useState<number>(0)
+    const [step, setStep] = useState<number>((data && data.statusCode != 0) ? data.statusCode : 0)
 
     function goNext() {
         if (step == 4) return;
@@ -203,7 +203,7 @@ export default function MealPage() {
             {step == 4 && (
                 <>
                     {/* openVote */}
-                    {!data.status && (
+                    {data.statusCode == 0 && (
                         <div className={styles.fixed}>
                             <div style={{ position: 'fixed', top: 0, left: 0, zIndex: -1 }}><svg width="430" height="359" viewBox="0 0 430 359" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <g clip-path="url(#clip0_118_218)">
@@ -223,7 +223,7 @@ export default function MealPage() {
                         </div>
                     )}
                     {/* confirmedChoice */}
-                    {data.status == 1 && (
+                    {data.statusCode == 1 && (
                         <div className={styles.fixed}>
                             <div style={{position: 'fixed', top: 0, left: 0,zIndex: -1}}>
                                 <svg width="430" height="361" viewBox="0 0 430 361" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -240,11 +240,11 @@ export default function MealPage() {
                             <Countdown>{`Time's up!`}</Countdown>
                             <HappyNommers />
                             <p>Woohoo! Your group will be nomming at:</p>
-                            <h1>Tendon Kohaku</h1>
+                            <h1>{data?.bookedRestaurant?.name}</h1>
                         </div>
                     )}
                     {/* confirmedBooking */}
-                    {data.status == 3 && (
+                    {data.statusCode == 3 && (
                         <div className={styles.fixed}>
                             <div className={styles.note}>
                                 <span><YellowCheck /></span>
@@ -273,7 +273,7 @@ export default function MealPage() {
                         </div>
                     )}
                     {/* postMeal */}
-                    {data.status == 3 && (
+                    {data.statusCode == 4 && (
                         <div className={styles.fixed}>
                             <div style={{position: 'fixed', top: 0, left: 0,zIndex: -1}}>
                                 <svg width="430" height="435" viewBox="0 0 430 435" fill="none" xmlns="http://www.w3.org/2000/svg">

@@ -147,6 +147,13 @@ export async function updateVisit(id: string, data: any) {
         bookedRestaurant: data
     }, { merge: true });
 }
+// can you tell i am deprived
+export async function changeMealStatus(id: string, data: number) {
+    await setDoc(doc(db, "visits", id), {
+        statusCode: data
+    }, { merge: true });
+}
+
 
 
 async function book(by: string, restaurantName: string, time: string, reso: number, visitId:string) {
@@ -256,7 +263,7 @@ export async function voteChoice(uid: string, visitId: string, option: 0 | 1 | 2
         const restaurantChoice = restaurants[0];
         await updateVisit(visitId, restaurantChoice);
 
-
+        await changeMealStatus(visitId, 2);
 
         const date = new Date(visit?.voteBy)
         const fifteenAfter = (new Date(date.getTime() + 15*60000)).toString();

@@ -29,7 +29,7 @@ export default function RestaurantCard({ data }: { data: Option }) {
     return (
         <div className={styles.card}>
             <div className={styles.images}>
-                <Carousel showArrows={false} autoPlay={false} showThumbs={false} swipeable={true} showStatus={false}>
+                <Carousel showArrows={false} autoPlay={false} showThumbs={false} swipeable={true} showStatus={false} showIndicators={false}>
                     {data?.images?.map((img, index) => (
                         <div className={styles.image} key={index}>
                             <Image objectFit="cover" layout="fill" alt={img} src={img}  />
