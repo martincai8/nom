@@ -1,12 +1,11 @@
 'use client';
 
 import Slider from '../Slider/Slider';
-import { useAuth } from '@/utility/Auth';
-import { use, useState } from 'react';
+import { useState } from 'react';
 import ArrowLeft from '@/drawings/ArrowLeft';
 import styles from './Groups.module.css';
 import { APIProvider, Map, Marker } from '@vis.gl/react-google-maps';
-import { handleGroupSubmit, handleSaveGroup } from '@/utility/firebase';
+import { handleGroupSubmit } from '@/utility/firebase';
 import Button from '../Button/Button';
 
 // Drawing imports
@@ -15,26 +14,21 @@ import FiSend from '@/drawings/FiSend';
 import CopyLink from '@/drawings/CopyLink';
 import Walking from '@/drawings/Walking';
 import GroupCreatedDrawing from '@/drawings/GroupCreatedDrawing';
+import { API_URL } from '@/utility/config';
+import ShortNerdyBommer from '@/drawings/ShortNerdyBommer';
+import ShortPommer from '@/drawings/ShortPommer';
+import CuriousYommer from '@/drawings/CuriousYommer';
+import NerdyGommer from '@/drawings/NerdyGommer';
 
-export default function Groups() {
-	// 5 total steps
+export default function Groups({ onFinish }: { onFinish: () => void }) {
 	const totalSteps = 5;
 	const [step, setStep] = useState<number>(0);
-	// const memebers = [
-	// 	{ key: 123, email: 'joanne.jiwoo@gmail.com', role: 'Admin' },
-	// 	{ key: 456, email: 'maureen.luo@gmail.com', role: 'Invited' },
-	// ];
 	const [members, setMembers] = useState<any[]>([{ key: 123, email: 'joanne.jiwoo@gmail.com', role: 'Admin' }]);
+	const [memberName, setMemberName] = useState<string>('');
 	const [groupName, setGroupName] = useState('nwPlus n friends');
 	const [address, setAddress] = useState('');
-	const [notificationTime, setNotificationTime] = useState('');
-
-	const [form, setForm] = useState<any>({
-        groupName: '',
-        members: [],
-        address: '',
-        notificationTime: ''
-    });
+	const [hour, setHour] = useState<string>('00');
+	const [min, setMin] = useState<string>('00');
 
 	const [markerLocation, setMarkerLocation] = useState({
 		lat: 49.2791,
@@ -44,7 +38,7 @@ export default function Groups() {
 
 	const onEnter = async () => {
 		try {
-			const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER}/geocode/coordinates`, {
+			const response = await fetch(`${API_URL}/api/geocode/coordinates`, {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
@@ -64,46 +58,29 @@ export default function Groups() {
 		}
 	};
 
-	//   function handleInput(key: string, value: any) {
-	//     const updatedForm = JSON.parse(JSON.stringify(form));
-	//     updatedForm[key] = value;
-	//     setForm(updatedForm);
-	//   }
-	//   const handle = (e: any) => handleInput("username", e.target.value);
-
-	//   triggered on every step
-	//   async function onSave() {
-	//     await handleSaveGroup(group.uid as string, {
-	//         groupName: form.groupName,
-	//         members: members,
-	//         address: address,
-	//         notificationTime: notificationTime
-	//     });
-	// }
-
-	//   async function onSubmit() {
-	//     await handleOnboardSubmit(user.uid as string, {
-	//         groupName: form.groupName,
-	//         members: members,
-	//         address: address,
-	//         notificationTime: notificationTime
-	//     });
-	//     setO(true);
-	//   }
+	function handleAddMember () {
+		if(!memberName) return;
+		const updatedMembers = JSON.parse(JSON.stringify(members));
+		updatedMembers.push({key: -1, email: memberName, role: 'Member'});
+		setMemberName('');
+		setMembers(updatedMembers);
+	}
 
 	async function goBack() {
-		if (step == 0) return;
+		if (step == 0) return onFinish();
 		setStep(step - 1);
 	}
 
 	async function goNext() {
 		if (step == 4) {
-			// at end -- go to "Create your first group"
-			console.log('you are at the end');
-			// await onSubmit();
+			await handleGroupSubmit({
+				name: groupName,
+				notificationTime: `${hour}:${min}`,
+				users: members
+			});
+			onFinish();
 			return;
 		}
-		// onSave();
 		setStep(step + 1);
 	}
 
@@ -112,7 +89,7 @@ export default function Groups() {
 			case 3:
 				// at reminders -- just go next
 				goNext();
-			// await onSave();
+				// await onSave();
 			default:
 				console.error('what is going on');
 		}
@@ -125,6 +102,13 @@ export default function Groups() {
 		3: '70',
 		4: '55',
 	};
+
+	const Nommers = [
+		<ShortNerdyBommer key={"Short nerdy gommer"}  />,
+		<ShortPommer key={"Short pommer"} />,
+		<CuriousYommer key="Curious yommer" />,
+		<NerdyGommer key={"Nerdy gommer"} />
+	]
 
 	return (
 		<div className={styles.wrapper}>
@@ -157,28 +141,34 @@ export default function Groups() {
 						<div className={`${styles.innerCenterWrapper}`}>
 							<GroupName />
 							<h1>Name your Group</h1>
-							<input type='text' placeholder='Group Name' className={`${styles.input}`} onChange={(e) => {setGroupName(e.target.value)}}/>
+							<input type='text' placeholder='Group Name' className={`${styles.input}`} onChange={(e) => {setGroupName(e.target.value)}} value={groupName} />
 						</div>
 					</div>
 
 					{/* Add Members */}
 					<div className={`${styles.stepInner} ${styles.step2}`}>
 						<div className={`${styles.innerLeftWrapper}`}>
+							<div style={{
+								display: 'flex',
+								gap: '0.5rem'
+							}}>
+								{Nommers?.slice(0, (members?.length - 2) + 1 <= 4 ? members?.length : 4)}
+							</div>
 							<h1>Add Members</h1>
 							<p className={`${styles.p}`}>Invite members below or share the invite link</p>
-							<div className={`${styles.horWrapper}`}>
-								<input type='text' placeholder='Group Name' className={`${styles.input}`} />
-								<button className={`${styles.sendButton}`}>
+							<div className={`${styles.horWrapper}`} style={{paddingTop: '1rem'}}>
+								<input type='text' placeholder='example@example.com' className={`${styles.input}`} value={memberName} onChange={e=>setMemberName(e.target.value)} />
+								<button className={`${styles.sendButton}`} onClick={handleAddMember}>
 									<FiSend />
 								</button>
 							</div>
 
 							<h2>Members</h2>
-							<div>
+							<div className={styles.members}>
 								{members.map((member) => (
-									<div className={`${styles.memberInfo}`} key={member.key}>
-										<p className={`${styles.p}`}>{member.email}</p>
-										<p className={`${styles.secondaryText} ${styles.p}`}>{member.role}</p>
+									<div className={styles.memberInfo} key={member.key}>
+										<p style={{textAlign:'left', flexGrow: 1}}>{member.email}</p>
+										<p style={{textAlign: 'center'}}>{member.role}</p>
 									</div>
 								))}
 							</div>
@@ -251,12 +241,12 @@ export default function Groups() {
 							<h2>Select a time:</h2>
 							<div className={`${styles.box} ${styles.RemHorWrapper}`}>
 								<div className={`${styles.verWrapper}`}>
-									<input className={`${styles.timeInput}`} />
+									<input className={`${styles.timeInput}`} value={hour} onChange={e=>setHour(e.target.value)} />
 									<p className={`${styles.timeSubtext}`}>HOUR</p>
 								</div>
 								<p className={`${styles.timeBigText}`}>:</p>
 								<div className={`${styles.verWrapper}`}>
-									<input className={`${styles.timeInput}`} />
+									<input className={`${styles.timeInput}`} value={min} onChange={e=>setMin(e.target.value)} />
 									<p className={`${styles.timeSubtext}`}>MIN</p>
 								</div>
 							</div>
@@ -276,11 +266,11 @@ export default function Groups() {
 
 			<div className={styles.control}>
 				<Button onClick={goNext} disabled={
-					(step == 0 && form?.groupName == "") || 
-					(step == 1 && form?.members.length < 2) ||
-					(step == 2 && form?.address == "")}
+					(step == 0 && groupName == "") || 
+					(step == 1 && members.length < 2) ||
+					(step == 2 && address == "")}
 				>
-					{step == totalSteps - 1 ? 'Finish' : step == 2 ? 'Confirm' : 'Next'}
+					{step == totalSteps - 1 ? 'Submit' : step == 2 ? 'Confirm' : 'Next'}
 				</Button>
 				{step == 3 && (
 					<div className={styles.fadedAction} onClick={goNextAlt}>

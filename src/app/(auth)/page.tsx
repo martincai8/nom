@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import Home from "@/components/Home/Home";
 import Groups from "@/components/Groups/Groups";
+import WelcomeCarousel from "@/components/WelcomeCarousel";
 
 export default function App() {
   const router = useRouter();
@@ -16,8 +17,7 @@ export default function App() {
 
   return !user ?
     !signingIn ?
-      // <WelcomeCarousel onNext={()=>setSigningIn(true)} />
-      <Groups />
+      <WelcomeCarousel onNext={()=>setSigningIn(true)} />
       : <Landing />
     : !isOnboarded ?
       <Onboarding/>  
