@@ -90,6 +90,13 @@ export async function handleSaveUser(uid: string, data: any) {
     }, { merge: true });
 }
 
+export async function handleSaveGroup(uid: string, data: any) {
+    // await setDoc(doc(db, "group", uid), {
+    //     ...data
+    // }, { merge: true });
+    console.log("saving group", data);
+}
+
 export async function handleOnboardSubmit(uid: string, data: any) {
     await setDoc(doc(db, "users", uid), {
         ...data,
