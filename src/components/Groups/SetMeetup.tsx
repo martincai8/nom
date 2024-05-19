@@ -56,7 +56,7 @@ export default function SetMeetup() {
 			</div>
 
 			<APIProvider
-				apiKey={process.env.NEXT_PUBLIC_GOOGLE_PLACES_API_KEY ?? ''}
+				apiKey={process.env.GOOGLE_PLACES_API_KEY ?? process.env.NEXT_PUBLIC_GOOGLE_PLACES_API_KEY ?? ''}
 				onLoad={() => console.log('Maps API has loaded.')}
 			>
 				<div className='map-container'>
