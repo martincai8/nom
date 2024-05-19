@@ -1,0 +1,122 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 0 3rem;
+    height: 100%;
+}
+
+h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    color: #000000;
+    font-weight: 500;
+    font-size: 32px;
+    margin: 0.4rem 0;
+}
+
+h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    color: #000000;
+    font-weight: 500;
+    font-size: 20px;
+    margin-top: 2rem;
+}
+
+p {
+    color: #000;
+    text-align: left;
+    font-family: "Hanken Grotesk", sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 100;
+    line-height: normal;
+    display: inline-block;
+}
+
+.hl {
+    color: #F23F3A;
+}
+
+.box {
+    border-radius: 14px;
+    border: 1px solid #F0F0F0;
+    /* background-color: none; */
+    width: 18rem;
+    height: 12rem;
+    align-self: center;
+    margin: 0.6rem 0;
+}
+
+.time-subtext {
+    font-family: 'Space Grotesk', sans-serif;
+    color: #858585;
+    font-weight: 500;
+    font-size: 15px;
+    margin-top: 0.5rem;
+}
+
+.time-input {
+    background-color: #F0F0F0;
+    color: #000000;
+    font-family: 'Hanken Grotesk', sans-serif;
+    font-size: 50px;
+    border: none;
+    font-weight: 700px;
+    border-radius: 12px;
+    width: 6rem;
+    height: 6rem;
+    flex-shrink: 0;
+    padding: 1rem;
+    margin: 0.4rem 0.4rem;
+
+}
+
+.time-bigtext {
+    color: #000000;
+    font-family: 'Hanken Grotesk', sans-serif;
+    font-size: 50px;
+    font-weight: 700px;
+    margin-bottom: 2rem;
+}
+
+.ver-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.hor-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.primary-button {
+    font-family: 'Space Grotesk', sans-serif;
+    border-radius: 5px;
+    background-color: #F23F3A;
+    color: white;
+    display: inline-flex;
+    padding: 6.5px 15px;
+    justify-content: center;
+    align-items: center;
+    border:none;
+    margin: 2rem 0  1rem  0;
+    align-self: center;
+}
+
+.sub-button {
+    color: #9B9B9B;
+    text-align: center;
+    font-family: "Hanken Grotesk", sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    background-color: white;
+    text-decoration: underline;
+    border: none;
+    align-self: center;
+}
