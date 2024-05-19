@@ -7,6 +7,7 @@ import styles from './Groups.module.css';
 import { APIProvider, Map, Marker } from '@vis.gl/react-google-maps';
 import { handleGroupSubmit } from '@/utility/firebase';
 import Button from '../Button/Button';
+import TextField from '../TextField/TextField';
 
 // Drawing imports
 import GroupName from '@/drawings/GroupName';
@@ -137,17 +138,23 @@ export default function Groups({ onFinish }: { onFinish: () => void }) {
 					}}
 				>
 					{/* GroupName */}
-					<div className={`${styles.stepInner} ${styles.step2}`}>
-						<div className={`${styles.innerCenterWrapper}`}>
-							<GroupName />
-							<h1>Name your Group</h1>
-							<input type='text' placeholder='Group Name' className={`${styles.input}`} onChange={(e) => {setGroupName(e.target.value)}} value={groupName} />
+
+					<div className={`${styles.stepInner} ${styles.step0}`}>
+						<div className={styles.container}>
+							<div className={styles.nommer}>
+								<GroupName />
+							</div>
+
+							<div className={styles.label}>Name your Group</div>
+							<div>
+								<TextField placeholder={"Group name"} value={groupName} onChange={(e: any) => {setGroupName(e.target.value)}} />
+							</div>
+							
 						</div>
 					</div>
 
 					{/* Add Members */}
 					<div className={`${styles.stepInner} ${styles.step2}`}>
-						<div className={`${styles.innerLeftWrapper}`}>
 							<div style={{
 								display: 'flex',
 								gap: '0.5rem'
@@ -155,9 +162,9 @@ export default function Groups({ onFinish }: { onFinish: () => void }) {
 								{Nommers?.slice(0, (members?.length - 2) + 1 <= 4 ? members?.length : 4)}
 							</div>
 							<h1>Add Members</h1>
-							<p className={`${styles.p}`}>Invite members below or share the invite link</p>
+							<p>Invite members below or share the invite link</p>
 							<div className={`${styles.horWrapper}`} style={{paddingTop: '1rem'}}>
-								<input type='text' placeholder='example@example.com' className={`${styles.input}`} value={memberName} onChange={e=>setMemberName(e.target.value)} />
+								<TextField placeholder={'example@example.com'} value={memberName} onChange={e=>setMemberName(e.target.value)} />
 								<button className={`${styles.sendButton}`} onClick={handleAddMember}>
 									<FiSend />
 								</button>
@@ -166,7 +173,7 @@ export default function Groups({ onFinish }: { onFinish: () => void }) {
 							<h2>Members</h2>
 							<div className={styles.members}>
 								{members.map((member) => (
-									<div className={styles.memberInfo} key={member.key}>
+									<div className={`${styles.memberInfo} ${styles.horWrapper}`} key={member.key}>
 										<p style={{textAlign:'left', flexGrow: 1}}>{member.email}</p>
 										<p style={{textAlign: 'center'}}>{member.role}</p>
 									</div>
@@ -184,81 +191,77 @@ export default function Groups({ onFinish }: { onFinish: () => void }) {
 									</div>
 								</button>
 							</div>
-						</div>
 					</div>
 
 					{/* SetMeetup */}
 					<div className={`${styles.stepInner} ${styles.step0}`}>
-						<div className={`${styles.innerLeftWrapper}`}>
-							<h1>Set a meetup area</h1>
-							<p className={`${styles.p}`}>We’ll suggest restaurants that are in your group’s area</p>
+						<h1>Set a meetup area</h1>
+						<p>We’ll suggest restaurants that are in your group’s area</p>
 
-							<h2>Enter Address</h2>
-							<div className={`${styles.horWrapper}`}>
-								<input
-									type='text'
-									placeholder='ex. your office area'
-									className={`${styles.input} ${styles.smallInput}`}
-									onChange={(e) => {
-										setAddress(e.target.value);
-									}}
-								/>
-								<button className={`${styles.meetupButton}`} onClick={onEnter}>
-									Enter
-								</button>
+						<h2>Enter Address</h2>
+						<div className={`${styles.horWrapper}`}>
+							<TextField
+								placeholder={'ex. your office area'}
+								value={address}
+								onChange={(e) => {
+									setAddress(e.target.value);
+								}}
+							/>
+							<button className={`${styles.meetupButton}`} onClick={onEnter}>
+								Enter
+							</button>
+						</div>
+
+						<APIProvider
+							apiKey={process.env.NEXT_PUBLIC_GOOGLE_PLACES_API_KEY ?? ''}
+							onLoad={() => console.log('Maps API has loaded.')}
+						>
+							<div className={`${styles.mapContainer}`}>
+								<Map defaultCenter={markerLocation} defaultZoom={13} gestureHandling={'greedy'} disableDefaultUI />
+								<Marker position={markerLocation} />
 							</div>
+						</APIProvider>
 
-							<APIProvider
-								apiKey={process.env.NEXT_PUBLIC_GOOGLE_PLACES_API_KEY ?? ''}
-								onLoad={() => console.log('Maps API has loaded.')}
-							>
-								<div className={`${styles.mapContainer}`}>
-									<Map defaultCenter={markerLocation} defaultZoom={13} gestureHandling={'greedy'} disableDefaultUI />
-									<Marker position={markerLocation} />
-								</div>
-							</APIProvider>
-
-							<p className={`${styles.mapText}`}>Pinch and drag to adjust the location and radius</p>
-
-							<div className={`${styles.capsuleWrapper}`}>
-								<Walking />
-								<p className={`${styles.distanceText}`}>{walkingDistance}m</p>
-							</div>
+						<p className={`${styles.mapText}`}>Pinch and drag to adjust the location and radius</p>
+						
+						<div className={`${styles.capsuleWrapper}`}>
+							<Walking />
+							<p className={`${styles.distanceText}`}>{walkingDistance}m</p>
 						</div>
 					</div>
 
 					{/* SetReminders */}
 					<div className={`${styles.stepInner} ${styles.step0}`}>
-						<div className={`${styles.innerLeftWrapper}`}>
-							<h1>
-								Set <span className={`${styles.hl}`}>reminders</span> for{' '}
-								<span className={`${styles.hl}`}>recurring</span> meals
-							</h1>
-							<p className={`${styles.p}`}>
-								We’ll send your group a notification when it’s time to vote on a restaurant!
-							</p>
+						<h1>
+							Set <span className={`${styles.hl}`}>reminders</span> for{' '}
+							<span className={`${styles.hl}`}>recurring</span> meals
+						</h1>
+						<p className={`${styles.p}`}>
+							We’ll send your group a notification when it’s time to vote on a restaurant!
+						</p>
 
-							<h2>Select a time:</h2>
-							<div className={`${styles.box} ${styles.RemHorWrapper}`}>
-								<div className={`${styles.verWrapper}`}>
-									<input className={`${styles.timeInput}`} value={hour} onChange={e=>setHour(e.target.value)} />
-									<p className={`${styles.timeSubtext}`}>HOUR</p>
-								</div>
-								<p className={`${styles.timeBigText}`}>:</p>
-								<div className={`${styles.verWrapper}`}>
-									<input className={`${styles.timeInput}`} value={min} onChange={e=>setMin(e.target.value)} />
-									<p className={`${styles.timeSubtext}`}>MIN</p>
-								</div>
+						<h2>Select a time:</h2>
+						<div className={`${styles.box} ${styles.RemHorWrapper}`}>
+							<div className={`${styles.verWrapper}`}>
+								<input className={`${styles.timeInput}`} value={hour} onChange={e=>setHour(e.target.value)} />
+								<p className={`${styles.timeSubtext}`}>HOUR</p>
+							</div>
+							<p className={`${styles.timeBigText}`}>:</p>
+							<div className={`${styles.verWrapper}`}>
+								<input className={`${styles.timeInput}`} value={min} onChange={e=>setMin(e.target.value)} />
+								<p className={`${styles.timeSubtext}`}>MIN</p>
 							</div>
 						</div>
 					</div>
 
 					{/* GroupCreated */}
 					<div className={`${styles.stepInner} ${styles.stepFinal}`}>
-						<div className={`${styles.innerCenterWrapper}`}>
-							<GroupCreatedDrawing />
-							<h1>{groupName}</h1>
-							<h2>Created!</h2>
+						<div className={`${styles.container}`}>
+							<div className={styles.nommer}>
+								<GroupCreatedDrawing />
+							</div>
+							<h1 className={styles.label}>{groupName}</h1>
+							<p>Created!</p>
 						</div>
 					</div>
 				</div>
