@@ -4,6 +4,9 @@ import Landing from "@/components/Landing/Landing";
 import Onboarding from "@/components/Onboard/Onboard";
 import Profile from "@/components/Profile";
 import WelcomeCarousel from "@/components/WelcomeCarousel";
+import GroupName from "@/components/Groups/GroupName"
+import AddMembers from "@/components/Groups/AddMembers";
+import SetMeetup from "@/components/Groups/SetMeetup";
 import { useAuth } from "@/utility/Auth";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
