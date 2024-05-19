@@ -49,6 +49,8 @@ export const AuthProvider = ({
                         phoneNumber: userInDb?.phoneNumber
                     }
                     setO(userInDb.isOnboarded);
+                } else {
+                    setO(false);
                 }
                 setUser({
                     photoUrl: user?.photoURL,
