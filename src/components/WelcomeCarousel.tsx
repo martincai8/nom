@@ -17,7 +17,7 @@ const WelcomeCarousel = ({ onNext }: {onNext: () => void}) => {
                     <h1>Get recommendations</h1>
                     <p>Based on your location, dietary restrictions, and group favourites. </p>
                 </div>
-                <div>
+                <div style={{ paddingBottom: '1rem' }}>
                     <img src="/images/secureSpot.png" alt="Secure a spot" />
                     <h1>Secure a spot</h1>
                     <p>No need to worry about booking a reservation - we do all that for you.</p>
