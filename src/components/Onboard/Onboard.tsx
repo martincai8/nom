@@ -111,7 +111,7 @@ export default function Onboarding() {
 
   useEffect(() => {
     // setPerms();
-    // subscribeDevice();
+    subscribeDevice();
     // unsubscribeDevice();
   }, [user])
 
