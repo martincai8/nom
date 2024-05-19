@@ -1,19 +1,51 @@
 "use client"
 
+import Button from "@/components/Button/Button";
 import Profile from "@/components/Profile";
+import LandingDrawing from "@/drawings/Landing";
 import { useAuth } from "@/utility/Auth";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
+import styles from './page.module.css'
 
 export default function Login() {
   const router = useRouter();
 
-  const { user } = useAuth();
+  const { user, siwg, logOut } = useAuth();
 
-  if (user) return router.push('/')
+  // if (user) return router.push('/')
     return (
-      <main>
-        youre on the login page. Login: <Profile />
-      </main>
+      <div className={styles.wrapper}>
+        <div>
+          <LandingDrawing />
+        </div>
+        <div className={styles.headers}>
+          <h2>Get started with</h2>
+          <h1>nom</h1>
+          <h4>
+            conveniently decide where to eat with friends + co-workers
+          </h4>
+        </div>
+        <div className={styles.buttons}>
+          <Button onClick={siwg} variant="outlined">
+            Sign Up
+          </Button>
+          <Button onClick={siwg}>
+            Log in
+          </Button>
+          <div className={styles.tray}> 
+            <h5>or connect using</h5>
+            <div className={styles.socialLogins}>
+              <div className={styles.gbtn} onClick={siwg}>
+                <Image src="/images/googleIcon.png" alt="google" height="25" width="25" />
+              </div>
+              <div onClick={siwg}>
+                <Image src="/images/facebookIcon.png" alt="facebook" height="35" width="35" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     );
   }
   

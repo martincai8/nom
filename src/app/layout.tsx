@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { Inter } from "next/font/google";
+import { Inter, Space_Grotesk } from "next/font/google";
 import { AuthProvider } from '@/utility/Auth'
 
 const inter = Inter({ subsets: ["latin"] });
+const space = Space_Grotesk({ subsets: ["latin"]});
 
 export const metadata: Metadata = {
   title: "nom nom nom",
@@ -18,7 +19,10 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <head>
+        <meta name="viewport" content="user-scalable=no"/>
+      </head>
+      <body className={`${inter.className} ${space.className}`}>
         <AuthProvider>
           {children}
         </AuthProvider>

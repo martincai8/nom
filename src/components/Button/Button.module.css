@@ -1,0 +1,26 @@
+/* base styles */
+.b {
+  background-color: black;
+  border: none;
+  padding: 0.6rem 1.5rem;
+  font-size: 1.2rem;
+  box-sizing: border-box;
+  border: 1px solid;
+  border-radius: 7px;
+  min-width: 160px;
+  font-family: "Space Grotesk", monospace;
+  font-weight: 500;
+}
+
+/* variants */
+.filled {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+  color: #fff;
+}
+
+.outlined {
+  border-color: var(--color-primary);
+  background-color: transparent;
+  color: var(--color-primary);
+}
