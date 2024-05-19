@@ -107,3 +107,14 @@ export async function getGroup(id: string) {
 
     return false;
 }
+
+/**
+ * 
+ * @param uid the user casting the vote
+ * @param mealId the `visit` collection item being voted to
+ * @param option the option being voted on
+ * @param vote being casted
+ */
+export async function vote(uid: string, mealId: string, option: 1 | 2 | 3, vote: boolean) {
+    
+}

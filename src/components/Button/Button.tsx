@@ -6,6 +6,8 @@ interface T {
     onClick?: any;
     disabled?: boolean;
     square?: boolean;
+    className?: any;
+    style?: any;
 }
 
 export default function Button({ 
@@ -13,11 +15,13 @@ export default function Button({
     variant = 'filled', 
     onClick, 
     square = false,
-    disabled = false 
+    disabled = false ,
+    className,
+    style,
 }: T) {
 
     return (
-        <button className={`${styles.b} ${styles[variant]} ${square ? styles.square : ''}`} onClick={onClick} disabled={disabled}>
+        <button className={`${className} ${styles.b} ${styles[variant]} ${square ? styles.square : ''}`} onClick={onClick} disabled={disabled} style={style}>
             {children}
         </button>
     )

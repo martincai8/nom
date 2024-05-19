@@ -33,7 +33,7 @@ export default function ActionBar() {
             <div className={`${path == '/groups' ? styles.active : ''}`} onClick={()=>router.push('/groups')}>
                 <Groups />
             </div>
-            <div className={`${path == '/alerts' ? styles.active : ''}`} onClick={()=>router.push('/alerts')}>
+            <div className={`${path.includes('alerts') ? styles.active : ''}`} onClick={()=>router.push('/alerts')}>
                 <Notifications />
             </div>
             <div className={`${path == '/profile' ? styles.active : ''}`} onClick={()=>router.push('/profile')}>

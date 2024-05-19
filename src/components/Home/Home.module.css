@@ -32,6 +32,7 @@
 
 .discover {
     padding-top: 2rem;
+    padding-bottom: 1rem;
 }
 .discoverInner {
     display: flex;
@@ -98,6 +99,7 @@
     font-size: 1.1rem;
     padding: 0 1rem 0.5rem 1rem;
 }
+
 .card {
     border:1px solid var(--color-border);
     border-radius: 10px;
