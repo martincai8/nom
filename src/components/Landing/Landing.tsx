@@ -6,9 +6,9 @@ import LandingDrawing from "@/drawings/Landing";
 import { useAuth } from "@/utility/Auth";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import styles from './page.module.css'
+import styles from './Landing.module.css'
 
-export default function Login() {
+export default function Landing() {
   const router = useRouter();
 
   const { user, siwg, logOut } = useAuth();

@@ -1,5 +1,6 @@
 "use client"
 
+import Landing from "@/components/Landing/Landing";
 import Onboarding from "@/components/Onboard/Onboard";
 import Profile from "@/components/Profile";
 import { useAuth } from "@/utility/Auth";
@@ -11,7 +12,7 @@ export default function Home() {
   const { isOnboarded, user } = useAuth();
 
   return !user ?
-    <Profile />
+    <Landing />
    : isOnboarded ? (
     <main>
       youre on the home page
