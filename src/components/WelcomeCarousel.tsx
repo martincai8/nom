@@ -3,7 +3,7 @@ import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import './WelcomeCarousel.css'; 
 
-const WelcomeCarousel: React.FC = () => {
+const WelcomeCarousel = ({ onNext }: {onNext: () => void}) => {
     return (
         <div className="welcome-carousel">
             <Carousel showArrows={false} autoPlay={false} showThumbs={false} swipeable={true} showStatus={false}>
@@ -22,7 +22,7 @@ const WelcomeCarousel: React.FC = () => {
                     <h1>Secure a spot</h1>
                     <p>No need to worry about booking a reservation - we do all that for you.</p>
                     <div className='button-row'>
-                        <button>Get Started</button>
+                        <button onClick={onNext}>Get Started</button>
                     </div>
                 </div>
             </Carousel>
