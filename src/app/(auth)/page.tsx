@@ -20,10 +20,8 @@ export default function Home() {
       : <Landing />
     : !isOnboarded ?
       <Onboarding/>  
-    : 
-      <main>
+    : <main>
         youre on the home page
         <Profile />
       </main>
 }
-

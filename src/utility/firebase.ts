@@ -74,6 +74,16 @@ export async function getUserOnboarded(uid: string) {
 
     return false;
 }
+export async function getUser(uid: string) {
+    const docRef = doc(db, "users", uid);
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+        return docSnap.data();
+    }
+
+    return false;
+}
 export async function handleSaveUser(uid: string, data: any) {
     await setDoc(doc(db, "users", uid), {
         ...data

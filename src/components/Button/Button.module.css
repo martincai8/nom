@@ -7,10 +7,17 @@
   box-sizing: border-box;
   border: 1px solid;
   border-radius: 7px;
-  min-width: 160px;
   font-family: "Space Grotesk", monospace;
   font-weight: 500;
   transition: all 0.13s ease;
+  min-width: 160px;
+}
+
+.square {
+  min-width: 0;
+  padding: 0.6rem;
+  height: 45px;
+  width: 45px;
 }
 
 /* variants */

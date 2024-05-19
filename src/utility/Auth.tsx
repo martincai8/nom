@@ -1,13 +1,15 @@
 "use client"
 
 import { createContext, useContext, useEffect, useState } from 'react';
-import { signOut, signInWithGoogle, onAuthChange, updateSubData, getUserOnboarded } from "@/utility/firebase"
+import { signOut, signInWithGoogle, onAuthChange, updateSubData, getUserOnboarded, getUser } from "@/utility/firebase"
 
-// TODO: User data type interface
-interface UserType {
+export interface UserType {
     displayName: string | null;
     email: string | null;
     uid: string | null;
+    photoUrl: string | null;
+    username?: string;
+    phoneNumber?: string;
 }
 
 type useAuthT = {
@@ -39,15 +41,23 @@ export const AuthProvider = ({
     useEffect(() => {
         const unsubscribe = onAuthChange(async (user: any) => {
             if (user) {
-                console.log(user);
+                const userInDb = await getUser(user.uid)
+                let userInDbData = {}
+                if (userInDb) {
+                    userInDbData = {
+                        username: userInDb?.username,
+                        phoneNumber: userInDb?.phoneNumber
+                    }
+                    setO(userInDb.isOnboarded);
+                }
                 setUser({
+                    photoUrl: user?.photoURL,
                     displayName: user.displayName,
                     email: user.email,
-                    uid: user.uid
+                    uid: user.uid,
+                    ...userInDbData
                 });
                 // check if user is onboarded
-                const onboarded = await getUserOnboarded(user.uid)
-                setO(onboarded);
             } else {
                 setUser(undefined);
             }

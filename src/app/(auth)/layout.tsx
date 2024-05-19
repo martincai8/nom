@@ -1,5 +1,6 @@
 "use client";
 
+import ActionBar from "@/components/ActionBar/ActionBar";
 import { useAuth } from "@/utility/Auth";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
@@ -21,5 +22,10 @@ export default function AppLayout({
       .catch((err) => console.log("sw.js registration fail: ", err));
   }, []);
 
-  return children
+  return (
+    <>
+      {children}
+      <ActionBar />
+    </>
+  )
 }

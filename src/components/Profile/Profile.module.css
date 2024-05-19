@@ -1,0 +1,62 @@
+
+.card {
+    border: 1.5px solid rgba(0,0,0,0.08);
+    padding: 1rem;
+    border-radius: 10px;
+}
+
+.card h2 {
+    font-family: "Space Grotesk", monospace;
+    font-weight: 500;
+}
+
+.cardTop {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.pfp {
+    border-radius: 999px;
+    overflow: hidden;
+    position: relative;
+    height: 100px;
+    width: 100px;
+    margin: 1rem auto;
+}
+
+.profileInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+.infoLabel {
+    color: #8C898F;
+}
+
+.settings {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    padding-top: 1rem;
+}
+
+.setting {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.8rem 0;
+    border-style: solid none none none;
+    border-width: 1px;
+    border-color: #F0F0F0;
+}
+.setting:last-child {
+    border-style: solid none;
+}
