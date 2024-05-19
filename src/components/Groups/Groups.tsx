@@ -32,7 +32,7 @@ export default function Groups({ onFinish }: { onFinish: () => void }) {
 	const [memberName, setMemberName] = useState<string>('');
 	const [groupName, setGroupName] = useState('nwPlus n friends');
 	const [address, setAddress] = useState('');
-	const [hour, setHour] = useState<string>('00');
+	const [hour, setHour] = useState<string>('11');
 	const [min, setMin] = useState<string>('00');
 
 	const [markerLocation, setMarkerLocation] = useState({
@@ -245,15 +245,17 @@ export default function Groups({ onFinish }: { onFinish: () => void }) {
 						</p>
 
 						<h2>Select a time:</h2>
-						<div className={`${styles.box} ${styles.RemHorWrapper}`}>
-							<div className={`${styles.verWrapper}`}>
-								<input className={`${styles.timeInput}`} value={hour} onChange={e=>setHour(e.target.value)} />
-								<p className={`${styles.timeSubtext}`}>HOUR</p>
-							</div>
-							<p className={`${styles.timeBigText}`}>:</p>
-							<div className={`${styles.verWrapper}`}>
-								<input className={`${styles.timeInput}`} value={min} onChange={e=>setMin(e.target.value)} />
-								<p className={`${styles.timeSubtext}`}>MIN</p>
+						<div style={{width:"100%", display:"flex", justifyContent:"center"}}>
+							<div className={`${styles.box} ${styles.RemHorWrapper}`}>
+								<div className={`${styles.verWrapper}`}>
+									<input className={`${styles.timeInput}`} value={hour} onChange={e=>setHour(e.target.value)} />
+									<p className={`${styles.timeSubtext}`}>HOUR</p>
+								</div>
+								<p className={`${styles.timeBigText}`}>:</p>
+								<div className={`${styles.verWrapper}`}>
+									<input className={`${styles.timeInput}`} value={min} onChange={e=>setMin(e.target.value)} />
+									<p className={`${styles.timeSubtext}`}>MIN</p>
+								</div>
 							</div>
 						</div>
 					</div>
