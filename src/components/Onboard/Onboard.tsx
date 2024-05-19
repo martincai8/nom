@@ -13,6 +13,10 @@ import Button from '../Button/Button';
 import TextField from '../TextField/TextField';
 import Gommer from '@/drawings/Gommer';
 
+const FoodOptions = {
+    
+}
+
 export default function Onboarding() {
 
     // device permissions stuff
@@ -179,7 +183,7 @@ export default function Onboarding() {
             <div className={styles.stepInner}>
                 <h2>What are your favourite foods?</h2>
                 <p>
-                    Choose as many as you'd like
+                    Choose as many as you{`'`}d like
                 </p>
             </div>
                 <div className={`${styles.stepInner} ${styles.step0}`}>
@@ -196,7 +200,7 @@ export default function Onboarding() {
                 <div className={styles.stepInner}>
                     <h2>What are your favourite foods?</h2>
                     <p>
-                        Choose as many as you'd like
+                        Choose as many as you{`'`}d like
                     </p>
                 </div>
                 <div className={styles.stepInner}>
@@ -223,7 +227,7 @@ export default function Onboarding() {
         </div>
 
         <div className={styles.control}>
-            <Button onClick={goNext}>
+            <Button onClick={goNext} disabled={form?.username == ""}>
                 Next
             </Button>
         </div>

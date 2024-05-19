@@ -1,10 +1,14 @@
 .field {
-  padding: 0.5rem 1rem;
+  padding: 0.8rem 1rem;
   font-family: "Inter"; /* for now, i don't have HK */
-  font-weight: 500;
-  font-size: 1.4rem;
+  font-weight: 400;
+  font-size: 1.25rem;
   background: #f7f5f3;
   border-radius: 8px;
   border: none;
   width: 100%;
+}
+
+.field::placeholder {
+  color: rgba(0,0,0,0.24);
 }
