@@ -19,7 +19,8 @@ export default function Home() {
 
   return !user ?
     !signingIn ?
-      <WelcomeCarousel onNext={()=>setSigningIn(true)} />
+      // <WelcomeCarousel onNext={()=>setSigningIn(true)} />
+      <SetMeetup />
       : <Landing />
     : !isOnboarded ?
       <Onboarding/>  
