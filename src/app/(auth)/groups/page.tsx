@@ -33,7 +33,7 @@ export default function GroupsPage() {
         getGroups();
     }, [user])
 
-    // const testGroups = [{key:123, name: "nwPlus n friends"}];
+    // const testGroups = [{key:123, name: "nwPlus n friends"},{key:123, name: "nwPlus n friends"},{key:123, name: "nwPlus n friends"},{key:123, name: "nwPlus n friends"},{key:123, name: "nwPlus n friends"},{key:123, name: "nwPlus n friends"}];
 
 
 
@@ -49,10 +49,10 @@ export default function GroupsPage() {
                 </button>
             </div>
             {groups && groups?.length > 0 ? (
-                <div>
+                <div style={{height:"40rem", overflow:"auto"}}>
                     
                     {groups?.map((g, index) => (
-                        <div key={g} style={{display:"flex", height:"100%"}}> 
+                        <div key={g} style={{display:"flex"}}> 
                             <b style={{alignSelf:"center", marginRight:"10px"}}>
                                 {index + 1}
                             </b>
