@@ -26,7 +26,7 @@ self.addEventListener('push', function(event) {
                 options.body = "Reservations have been made for 3 at xyz"
             default:
                 title = "Get ready to eat!"
-                options.body = "Vote on today's top 3 restaurants"
+                options.body = data?.body;
 				options.data.url = `https://nom-nu.vercel.app/alerts/${data?.visitId}`
         }
 	}
