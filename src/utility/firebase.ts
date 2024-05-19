@@ -225,25 +225,27 @@ export async function voteChoice(uid: string, visitId: string, option: 0 | 1 | 2
     
     // update visits doc
     await setDoc(doc(db, "visits", visitId), {
-        option: newOptions,
+        options: newOptions,
         users: newUsers
     }, { merge: true });
 
     const group = await getGroup(visit?.groupId);
     if(!group) return
 
-
-    // rank order options by voteCount
-    const restaurants = newOptions.sort((a: any, b: any) => a.voteCount > b.voteCount ? 1 : 0)
-    console.log(restaurants);
-
-
-    const restaurantChoice = restaurants[0];
-    await updateVisit(visitId, restaurantChoice);
     
 
     if (newUsers.length == group.users.length) {
         // user is the last voter, make call  trigger booking by top restaurant
+
+        // rank order options by voteCount
+        const restaurants = newOptions.sort((a: any, b: any) => a.voteCount > b.voteCount ? 1 : 0)
+        console.log(restaurants);
+
+
+        const restaurantChoice = restaurants[0];
+        await updateVisit(visitId, restaurantChoice);
+
+
 
         const date = new Date(visit?.voteBy)
         const fifteenAfter = (new Date(date.getTime() + 15*60000)).toString();
