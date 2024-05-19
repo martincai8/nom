@@ -27,6 +27,7 @@ body {
 
 body {
   background: var(--color-background);
+  touch-action:none;
 }
 
 a {
