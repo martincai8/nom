@@ -84,17 +84,24 @@ export async function getUser(uid: string) {
 
     return false;
 }
+
+export async function handleSaveGroup(uid: string, data: any) {
+    await setDoc(doc(db, "group", uid), {
+        ...data
+    }, { merge: true });
+    console.log("saving group", data);
+}
+export async function handleGroupSubmit(uid: string, data: any) {
+    // await setDoc(doc(db, "users", uid), {
+    //     ...data,
+    //     isOnboarded: true
+    // }, { merge: true });
+}
+
 export async function handleSaveUser(uid: string, data: any) {
     await setDoc(doc(db, "users", uid), {
         ...data
     }, { merge: true });
-}
-
-export async function handleSaveGroup(uid: string, data: any) {
-    // await setDoc(doc(db, "group", uid), {
-    //     ...data
-    // }, { merge: true });
-    console.log("saving group", data);
 }
 
 export async function handleOnboardSubmit(uid: string, data: any) {
@@ -103,6 +110,7 @@ export async function handleOnboardSubmit(uid: string, data: any) {
         isOnboarded: true
     }, { merge: true });
 }
+
 
 export async function getGroup(id: string) {
     const docRef = doc(db, "groups", id);

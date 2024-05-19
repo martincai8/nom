@@ -6,6 +6,7 @@ import { use, useState } from 'react';
 import ArrowLeft from '@/drawings/ArrowLeft';
 import styles from './Groups.module.css';
 import { APIProvider, Map, Marker } from '@vis.gl/react-google-maps';
+import { handleGroupSubmit, handleSaveGroup } from '@/utility/firebase';
 import Button from '../Button/Button';
 
 // Drawing imports
@@ -19,17 +20,21 @@ export default function Groups() {
 	// 5 total steps
 	const totalSteps = 5;
 	const [step, setStep] = useState<number>(0);
-	const memebers = [
-		{ key: 123, email: 'joanne.jiwoo@gmail.com', role: 'Admin' },
-		{ key: 456, email: 'maureen.luo@gmail.com', role: 'Invited' },
-	];
-	//   const [members, setMembers] = useState<string[]>([]);
+	// const memebers = [
+	// 	{ key: 123, email: 'joanne.jiwoo@gmail.com', role: 'Admin' },
+	// 	{ key: 456, email: 'maureen.luo@gmail.com', role: 'Invited' },
+	// ];
+	const [members, setMembers] = useState<any[]>([{ key: 123, email: 'joanne.jiwoo@gmail.com', role: 'Admin' }]);
 	const [groupName, setGroupName] = useState('nwPlus n friends');
 	const [address, setAddress] = useState('');
-	const [notificationTime, setNotificationTime] = useState<any>({
-		hour: '',
-		min: '',
-	});
+	const [notificationTime, setNotificationTime] = useState('');
+
+	const [form, setForm] = useState<any>({
+        groupName: '',
+        members: [],
+        address: '',
+        notificationTime: ''
+    });
 
 	const [markerLocation, setMarkerLocation] = useState({
 		lat: 49.2791,
@@ -66,7 +71,7 @@ export default function Groups() {
 	//   }
 	//   const handle = (e: any) => handleInput("username", e.target.value);
 
-	//   // triggered on every step
+	//   triggered on every step
 	//   async function onSave() {
 	//     await handleSaveGroup(group.uid as string, {
 	//         groupName: form.groupName,
@@ -152,7 +157,7 @@ export default function Groups() {
 						<div className={`${styles.innerCenterWrapper}`}>
 							<GroupName />
 							<h1>Name your Group</h1>
-							<input type='text' placeholder='Group Name' className={`${styles.input}`} />
+							<input type='text' placeholder='Group Name' className={`${styles.input}`} onChange={(e) => {setGroupName(e.target.value)}}/>
 						</div>
 					</div>
 
@@ -170,7 +175,7 @@ export default function Groups() {
 
 							<h2>Members</h2>
 							<div>
-								{memebers.map((member) => (
+								{members.map((member) => (
 									<div className={`${styles.memberInfo}`} key={member.key}>
 										<p className={`${styles.p}`}>{member.email}</p>
 										<p className={`${styles.secondaryText} ${styles.p}`}>{member.role}</p>
@@ -270,7 +275,13 @@ export default function Groups() {
 			</div>
 
 			<div className={styles.control}>
-				<Button onClick={goNext}>{step == totalSteps - 1 ? 'Finish' : step == 2 ? 'Confirm' : 'Next'}</Button>
+				<Button onClick={goNext} disabled={
+					(step == 0 && form?.groupName == "") || 
+					(step == 1 && form?.members.length < 2) ||
+					(step == 2 && form?.address == "")}
+				>
+					{step == totalSteps - 1 ? 'Finish' : step == 2 ? 'Confirm' : 'Next'}
+				</Button>
 				{step == 3 && (
 					<div className={styles.fadedAction} onClick={goNextAlt}>
 						{'Skip for now'}
