@@ -132,6 +132,12 @@ export async function getVisit(id: string) {
     }
 }
 
+export async function updateVisit(id: string, data: any) {
+    await setDoc(doc(db, "visits", id), {
+        bookedRestaurant: data
+    }, { merge: true });
+}
+
 
 async function book(by: string, restaurantName: string, time: string, reso: number, visitId:string) {
     const options = {
@@ -233,6 +239,8 @@ export async function voteChoice(uid: string, visitId: string, option: 0 | 1 | 2
 
 
     const restaurantChoice = restaurants[0];
+    await updateVisit(visitId, restaurantChoice);
+    
 
     if (newUsers.length == group.users.length) {
         // user is the last voter, make call  trigger booking by top restaurant
