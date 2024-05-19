@@ -5,6 +5,11 @@
   height: 100%;
 }
 
+.drawingContainer {
+  display: flex;
+  justify-content: center;
+}
+
 .headers {
   display: flex;
   flex-direction: column;
@@ -15,7 +20,7 @@
 
 .headers h2 {
   padding-top: 3.5rem;
-  font-size: 2rem;
+  font-size: 1.7rem;
   font-weight: 500;
 }
 

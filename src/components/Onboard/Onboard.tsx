@@ -6,6 +6,12 @@ import { APPLICATION_KEYS } from '@/utility/config';
 import { handleOnboardSubmit } from '@/utility/firebase';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react'
+import ArrowLeft from '@/drawings/ArrowLeft';
+import Nommer from '@/drawings/Nommer';
+import Slider from '../Slider/Slider';
+import Button from '../Button/Button';
+import TextField from '../TextField/TextField';
+import Gommer from '@/drawings/Gommer';
 
 export default function Onboarding() {
 
@@ -100,6 +106,11 @@ export default function Onboarding() {
 
 
   // form stuff
+
+  // 5 total steps
+  const totalSteps = 6;
+  const [ step, setStep ] = useState<number>(0);
+
     const [form, setForm] = useState<any>({
         phoneNumber: '',
         username: '',
@@ -113,26 +124,109 @@ export default function Onboarding() {
     updatedForm[key] = value;
     setForm(updatedForm);
   }
+  const handleUsername = (e: any) => handleInput("username", e.target.value);
 
   async function onSubmit() {
     await handleOnboardSubmit(user.uid as string, form);
     setO(true);
   }
 
+  async function goBack() {
+    if (step == 0) return
+    setStep(step - 1);
+  }
+
+  async function goNext() {
+    if (step == 6) {
+        // at end
+        console.log('do something else')
+        return
+    }
+ 
+    setStep(step + 1);
+  }
+
+  const stepToHeight: any = {
+    0: '50',
+    1: '45',
+    2: '85',
+    3: '85',
+    4: '85',
+    5: '45',
+  }
+
   return (
-    <main> 
-        youre on the onboarding page
-        <br />
-        permission: <button onClick={subscribeDevice}>subscribe!</button>
-        <br/>
-        {/* phone number, username, foods[], dietaries[], allergies */}
-        phone number: <input type="text" value={form?.phoneNumber} onChange={e=>handleInput('phoneNumber', e.target.value)} />
-        <br/>
-        username: <input type="text" value={form?.username} onChange={e=>handleInput('username', e.target.value)} />
-        <br />
-        <button onClick={onSubmit}>
-            complete onboarding
-        </button>
-    </main>
+    <div className={styles.wrapper}> 
+        <div className={styles.top}>
+            <div className={styles.back} onClick={goBack}>
+                <ArrowLeft />
+            </div>
+            <Slider value={step} max={totalSteps} />
+        </div>
+
+        <div style={{
+                width: `${totalSteps * 100}vw`,
+                height: `${stepToHeight[step]}vh`,
+                transition: `all 0.13s ease`,
+            }}>
+            <div style={{
+                display: `grid`,
+                gridTemplateColumns:`repeat(${totalSteps}, 1fr)`,
+                width: `${totalSteps * 100}vw`,
+                transition: `all 0.13s ease`,
+                transform: `translateX(-${step * 100}vw)`
+            }}>
+            <div className={styles.stepInner}>
+                <h2>What are your favourite foods?</h2>
+                <p>
+                    Choose as many as you'd like
+                </p>
+            </div>
+                <div className={`${styles.stepInner} ${styles.step0}`}>
+                    <div className={styles.container}>
+                        <div className={styles.nommer}>
+                            <Nommer />
+                        </div>
+                        <h2>Choose your username</h2>
+                        <div>
+                            <TextField placeholder={"Your username"} value={form?.username} onChange={handleUsername} />
+                        </div>
+                    </div>
+                </div>
+                <div className={styles.stepInner}>
+                    <h2>What are your favourite foods?</h2>
+                    <p>
+                        Choose as many as you'd like
+                    </p>
+                </div>
+                <div className={styles.stepInner}>
+                    <h2>Dietary preferences</h2>
+                    <p>
+                        nom will offer restaurants that have options aligning with your diet
+                    </p>
+                </div>
+                <div className={styles.stepInner}>
+                    <div className={styles.container}>
+                        <div className={styles.nommer}>
+                            <Gommer />
+                        </div>
+                        <h2>Do you have any allergies?</h2>
+                        <div>
+                            <TextField placeholder={"Your username"} value={form?.username} onChange={handleUsername} />
+                        </div>
+                    </div>
+                </div>
+                <div className={styles.stepInner}>
+                    youre ready to nom
+                </div>
+            </div>
+        </div>
+
+        <div className={styles.control}>
+            <Button onClick={goNext}>
+                Next
+            </Button>
+        </div>
+    </div>
   );
 }
