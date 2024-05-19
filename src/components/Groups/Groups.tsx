@@ -266,8 +266,10 @@ export default function Groups({ onFinish }: { onFinish: () => void }) {
 							<div className={styles.nommer}>
 								<GroupCreatedDrawing />
 							</div>
-							<h1 className={styles.label}>{groupName}</h1>
-							<p>Created!</p>
+							<div style={{display:"flex", justifyContent:"center"}}>
+								<h1 className={styles.label} style={{textAlign:"center"}}>{groupName}</h1>
+							</div>
+							<p style={{textAlign:"center"}}>Created!</p>
 						</div>
 					</div>
 				</div>
