@@ -74,6 +74,11 @@ export async function getUserOnboarded(uid: string) {
 
     return false;
 }
+export async function handleSaveUser(uid: string, data: any) {
+    await setDoc(doc(db, "users", uid), {
+        ...data
+    }, { merge: true });
+}
 
 export async function handleOnboardSubmit(uid: string, data: any) {
     await setDoc(doc(db, "users", uid), {

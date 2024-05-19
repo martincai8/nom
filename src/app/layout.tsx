@@ -22,7 +22,7 @@ export default function RootLayout({
       <head>
         <meta name="viewport" content="user-scalable=no"/>
       </head>
-      <body className={`${inter.className} ${space.className}`}>
+      <body className={inter.className}>
         <AuthProvider>
           {children}
         </AuthProvider>

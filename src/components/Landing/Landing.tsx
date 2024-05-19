@@ -16,7 +16,7 @@ export default function Landing() {
   // if (user) return router.push('/')
     return (
       <div className={styles.wrapper}>
-        <div>
+        <div className={styles.drawingContainer}>
           <LandingDrawing />
         </div>
         <div className={styles.headers}>

@@ -1,0 +1,13 @@
+.stepper {
+  border-radius: 999px;
+  background: var(--color-primary-faded);
+  height: 15px;
+  width: 100%;
+  overflow: hidden;
+}
+.progress {
+  transition: all 0.13s ease;
+  background: var(--color-primary);
+  height: 100%;
+  border-radius: 999px;
+}
