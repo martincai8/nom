@@ -33,13 +33,8 @@ export default function GroupsPage() {
         getGroups();
     }, [user])
 
-    // const testGroups = [{key:123, name: "nwPlus n friends"},{key:123, name: "nwPlus n friends"},{key:123, name: "nwPlus n friends"},{key:123, name: "nwPlus n friends"},{key:123, name: "nwPlus n friends"},{key:123, name: "nwPlus n friends"}];
-
-
-
     return !creating ? (
         <div className={styles.wrapper}>
-            {/* <MiniYommer /> */}
             <div className={styles.horWrapper}>
                 <h1>
                     Your groups
@@ -48,29 +43,29 @@ export default function GroupsPage() {
                     Create group
                 </button>
             </div>
-            {groups && groups?.length > 0 ? (
-                <div style={{height:"40rem", overflow:"auto"}}>
-                    
-                    {groups?.map((g, index) => (
-                        <div key={g} style={{display:"flex"}}> 
-                            <b style={{alignSelf:"center", marginRight:"10px"}}>
-                                {index + 1}
-                            </b>
-                            
-                            <div className={styles.groupPanel} key={g}>
-                                <div style={{display:"flex"}}>
+            <div className={styles.groups}>
+                {groups && groups?.length > 0 ? (
+                    <div className={styles.groupsInner}>
+                        {groups?.map((g, index) => (
+                            <div key={g} style={{display:"flex"}}> 
+                                <b style={{alignSelf:"center", marginRight:"1rem"}}>
+                                    {index + 1}
+                                </b>
+                                <div className={styles.groupPanel} key={g}>
                                     <TwoNoms />
-                                    <p style={{alignSelf:"Center", marginLeft:"10px"}}>{g.name}</p>
+                                    <p>{g.name}</p>
                                 </div>
                             </div>
-                        </div>
-                    ))}
-                </div>
-            ) : (
-                <p className={styles.subText}>
-                    It{`'`}s looking a little lonely here. <br />Try making a new group!
-                </p>
-            )}
+                        ))}
+                    </div>
+                ) : (
+                    <p className={styles.subText}>
+                        It{`'`}s looking a little lonely here.
+                        <br />
+                        Try making a new group!
+                    </p>
+                )}
+            </div>
             <div className={styles.nommerGroup}>
                 <NommerGroup />
             </div>

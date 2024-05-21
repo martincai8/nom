@@ -73,9 +73,12 @@ export const AuthProvider = ({
       await signInWithGoogle();
     };
 
-    async function logOut() {
+    async function logOut(cb?: any) {
         setUser(undefined);
         await signOut();
+        if (cb) {
+            cb();
+        }
     };
 
     // sets push 

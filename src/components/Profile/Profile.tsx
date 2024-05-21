@@ -5,6 +5,7 @@ import Button from '../Button/Button'
 import styles from './Profile.module.css'
 import { UserType, useAuth } from '@/utility/Auth'
 import { useEffect } from 'react'
+import { useRouter } from 'next/navigation'
 
 const EditIcon = () => (<svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path fill-rule="evenodd" clip-rule="evenodd" d="M11 20.5C11 19.9477 11.4477 19.5 12 19.5H21C21.5523 19.5 22 19.9477 22 20.5C22 21.0523 21.5523 21.5 21 21.5H12C11.4477 21.5 11 21.0523 11 20.5Z" fill="white"/>
@@ -23,6 +24,7 @@ const keyToLabelMap: any = {
 
 export function Settings() {
 
+    const router = useRouter();
     const { logOut } = useAuth();
 
     return (
@@ -42,7 +44,7 @@ export function Settings() {
             <div className={styles.infoLabel}>
                 Account
             </div>
-            <div className={styles.infoValue} onClick={()=>logOut()}>
+            <div className={styles.infoValue} onClick={()=>logOut(()=>router.push('/'))}>
                 Sign out
             </div>
         </div>
