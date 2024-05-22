@@ -77,11 +77,7 @@ export default function GroupInfoPage() {
                         Meals History
                     </h2>
                     <div className={styles.mealsList}>
-                        {meals?.filter?.((m: any) => !!m.bookedRestaurants)?.length == 0 ? (
-                            <div>
-                                No meals yet!
-                            </div>
-                        ) : meals?.map((m: any) => m?.bookedRestaurant?.name && (
+                        {meals?.map((m: any) => m?.bookedRestaurant?.name && (
                             <div className={styles.meal} key={m._id}>
                                 <div className={styles.ml}>
                                     <span style={{opacity: 0.6}}>
