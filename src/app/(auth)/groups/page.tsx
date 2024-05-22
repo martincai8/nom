@@ -9,8 +9,11 @@ import { useAuth } from '@/utility/Auth';
 import { getAllGroups } from '@/utility/firebase';
 import NommerGroup from '@/drawings/NommerGroup';
 import TwoNoms from '@/drawings/TwoNoms';
+import { useRouter } from 'next/navigation';
 
 export default function GroupsPage() {
+
+    const router = useRouter();
 
     const [creating, setCreating] = useState<boolean>(false);
     const [groups, setGroups] = useState<any[]>();
@@ -19,14 +22,9 @@ export default function GroupsPage() {
 
     async function getGroups() {
         if(!user?.email) return
-
         let allgroups = await getAllGroups();
-
         const array = allgroups.filter((g: any) => (g?.users?.map((u: any) => u?.email)).includes(user.email) );
-
         setGroups(array);
-
-        console.log(array);
     }
 
     useEffect(() => {
@@ -47,7 +45,7 @@ export default function GroupsPage() {
                 {groups && groups?.length > 0 ? (
                     <div className={styles.groupsInner}>
                         {groups?.map((g, index) => (
-                            <div key={g} style={{display:"flex"}}> 
+                            <div key={g} style={{display:"flex"}} onClick={()=>router.push(`/groups/${g._id}`)}> 
                                 <b style={{alignSelf:"center", marginRight:"1rem"}}>
                                     {index + 1}
                                 </b>

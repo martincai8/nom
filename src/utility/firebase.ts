@@ -113,7 +113,10 @@ export async function getAllGroups() {
 	const querySnapshot = await getDocs(q);
 	const docs: any = [];
 	querySnapshot.forEach((doc) => {
-		docs.push(doc.data());
+		docs.push({
+			...doc.data(),
+			_id: doc.id
+		});
 	});
 	return docs;
 }
@@ -127,6 +130,31 @@ export async function getGroup(id: string) {
 	}
 
 	return false;
+}
+
+export async function getGroupVisits(groupId: string) {
+	const q = query(collection(db, 'visits'), where("groupId", "==", groupId));
+	const querySnapshot = await getDocs(q);
+	const docs: any = [];
+	querySnapshot.forEach((doc) => {
+		docs.push({ ...doc.data(), _id: doc.id });
+	});
+	return docs;
+}
+
+export async function getUsers(userEmails: string[]) {
+	const users: any = [];
+	for (let i = 0; i < userEmails.length; i++) {
+		const q = query(collection(db, 'users'), where("email", "==", userEmails[i]));
+		const querySnapshot = await getDocs(q);
+		querySnapshot.forEach((doc) => {
+			users.push({
+				...doc.data(),
+				_id: doc.id
+			})
+		});
+	}
+	return users;
 }
 
 export async function getAllVisits() {
@@ -269,7 +297,7 @@ export async function voteChoice(
 	const group = await getGroup(visit?.groupId);
 	if (!group) return;
 
-	if (newUsers.length == group.users.length) {
+	if ((newUsers.length == group.users.length) && option == 2) {
 		// user is the last voter, make call  trigger booking by top restaurant
 
 		// rank order options by voteCount
